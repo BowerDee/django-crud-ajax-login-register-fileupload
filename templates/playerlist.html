@@ -32,10 +32,6 @@
                                 <th>id</th>
                                 <th>phone</th>
                                 <th>user name</th>
-                                {% comment %} <th>Last Name</th> {% endcomment %}
-                                {% comment %} <th>Mobile Number</th> {% endcomment %}
-                                {% comment %} <th>Description</th> {% endcomment %}
-                                {% comment %} <th>Location</th> {% endcomment %}
                                 <th>Created At</th>
                                 <th>last login</th>
                                 <th>Action</th>
@@ -47,8 +43,6 @@
                                     <td>{{ member.id }}</td>
                                     <td>{{ member.phone }}</td>
                                     <td>{{ member.username }}</td>
-                                    {% comment %} <td>{{ member.description }}</td> {% endcomment %}
-                                    {% comment %} <td>{{ member.location }}</td> {% endcomment %}
                                     <td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>{{ member.last_login  |date:"d-m-Y H:i:s" }}</td>
                                     <td>

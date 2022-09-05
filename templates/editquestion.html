@@ -25,19 +25,19 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.firstname }}" name="firstname" placeholder="First Name" id="inputFirst" required>
-                                    <label for="inputFirst">First Name</label>
+                                    <input type="text" class="form-control" value="{{ members.topic }}" name="topic" placeholder="topic" id="inputFirst" required>
+                                    <label for="inputFirst">topic</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.firstname }}" name="lastname" placeholder="Last Name" id="inputLast" required>
-                                    <label for="inputLast">Last Name</label>
+                                    <input type="text" class="form-control" value="{{ members.describtion }}" name="describtion" placeholder="describtion" id="inputLast" required>
+                                    <label for="inputLast">describtion</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    {% comment %} <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
                 </div>

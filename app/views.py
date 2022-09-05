@@ -12,9 +12,21 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
 
+def getMemberForIndex(page):
+    members_list = UserInfo.objects.all()
+    paginator = Paginator(members_list, 5)
+    try:
+        members = paginator.page(page)
+    except PageNotAnInteger:
+        members = paginator.page(1)
+    except EmptyPage:
+        members = paginator.page(paginator.num_pages)
+    return members
+
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    members = getMemberForIndex(request.GET.get('page'))
+    return render(request, 'index.html', {'members': members})
 
 
 @login_required

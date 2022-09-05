@@ -30,14 +30,19 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>phone</th>
-                                <th>user name</th>
+                                <th>topic</th>
+                                <th>describtion</th>
                                 {% comment %} <th>Last Name</th> {% endcomment %}
                                 {% comment %} <th>Mobile Number</th> {% endcomment %}
                                 {% comment %} <th>Description</th> {% endcomment %}
                                 {% comment %} <th>Location</th> {% endcomment %}
-                                <th>Created At</th>
-                                <th>last login</th>
+                                <th>tips</th>
+                                <th>type</th>
+                                <th>an_1</th>
+                                <th>an_2</th>
+                                <th>an_3</th>
+                                <th>an_4</th>
+                                <th>correct</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -45,12 +50,15 @@
                             {% for member in members %}
                                 <tr>
                                     <td>{{ member.id }}</td>
-                                    <td>{{ member.phone }}</td>
-                                    <td>{{ member.username }}</td>
-                                    {% comment %} <td>{{ member.description }}</td> {% endcomment %}
-                                    {% comment %} <td>{{ member.location }}</td> {% endcomment %}
-                                    <td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ member.last_login  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>{{ member.topic }}</td>
+                                    <td>{{ member.describtion }}</td>
+                                    <td>{{ member.tips }}</td>
+                                    <td>{{ member.qtype }}</td>
+                                    <td>{{ member.an_1 }}</td>
+                                    <td>{{ member.an_2 }}</td>
+                                    <td>{{ member.an_3 }}</td>
+                                    <td>{{ member.an_4 }}</td>
+                                    <td>{{ member.correct}}</td>
                                     <td>
                                         <a class="btn btn-sm btn-warning" href="editquestion/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
                                         <a class="btn btn-sm btn-danger" href="deletequestion/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>

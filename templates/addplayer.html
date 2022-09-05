@@ -9,35 +9,35 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">CRUD</a>
+                    <a href="#">Player</a>
                 </li>
                 <li class="breadcrumb-item active">Add</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Crud Add
+                    Player Add
                 </div>
                 <div class="card-body">
-                  <form class="form-horizontal" action="create" method="POST">
+                  <form class="form-horizontal" action="createplayer" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="firstname" placeholder="First Name" id="inputFirst" required>
-                                    <label for="inputFirst">First Name</label>
+                                    <input type="text" class="form-control" name="phone" placeholder="phone" id="inputFirst" required>
+                                    <label for="inputFirst">phone</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" id="inputLast" required>
-                                    <label for="inputLast">Last Name</label>
+                                    <input type="text" class="form-control" name="username" placeholder="username" id="inputLast" required>
+                                    <label for="inputLast">username</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    {% comment %} <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
                 </div>
