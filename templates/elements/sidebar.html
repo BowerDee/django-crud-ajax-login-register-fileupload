@@ -5,24 +5,36 @@
             <span>Dashboard</span>
         </a>
     </li>
-    <li class="nav-item">
+    {% comment %} <li class="nav-item">
         <a class="nav-link" href="{% url 'list' %}">
             <i class="fas fa-fw fa-database"></i>
             <span>CRUD App</span>
         </a>
+    </li> {% endcomment %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'playerlist' %}">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Player list</span>
+        </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{% url 'queationlist' %}">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Questions lib</span>
+        </a>
+    </li>
+    {% comment %} <li class="nav-item">
         <a class="nav-link" href="{% url 'fileupload' %}">
             <i class="fas fa-fw fa-table"></i>
             <span>File Upload</span>
         </a>
-    </li>
-    <li class="nav-item">
+    </li> {% endcomment %}
+    {% comment %} <li class="nav-item">
         <a class="nav-link" href="{% url 'ajax' %}">
             <i class="fas fa-fw fa-bullseye"></i>
             <span>Ajax Crud</span>
         </a>
-    </li>
+    </li> {% endcomment %}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
@@ -38,7 +50,7 @@
             <span>More Freature</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="{% url 'upload_csv' %}">CSV Import</a>
+            {% comment %} <a class="dropdown-item" href="{% url 'upload_csv' %}">CSV Import</a> {% endcomment %}
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'changePassword' %}">Change Password</a>
         </div>

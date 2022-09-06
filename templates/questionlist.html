@@ -1,0 +1,81 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Question list</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Question List
+                    <a  class="btn btn-sm btn-success" href="{% url 'createquestion' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>topic</th>
+                                <th>describtion</th>
+                                {% comment %} <th>Last Name</th> {% endcomment %}
+                                {% comment %} <th>Mobile Number</th> {% endcomment %}
+                                {% comment %} <th>Description</th> {% endcomment %}
+                                {% comment %} <th>Location</th> {% endcomment %}
+                                <th>tips</th>
+                                <th>type</th>
+                                <th>an_1</th>
+                                <th>an_2</th>
+                                <th>an_3</th>
+                                <th>an_4</th>
+                                <th>correct</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for member in members %}
+                                <tr>
+                                    <td>{{ member.id }}</td>
+                                    <td>{{ member.topic }}</td>
+                                    <td>{{ member.describtion }}</td>
+                                    <td>{{ member.tips }}</td>
+                                    <td>{{ member.qtype }}</td>
+                                    <td>{{ member.an_1 }}</td>
+                                    <td>{{ member.an_2 }}</td>
+                                    <td>{{ member.an_3 }}</td>
+                                    <td>{{ member.an_4 }}</td>
+                                    <td>{{ member.correct}}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-warning" href="editquestion/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        <a class="btn btn-sm btn-danger" href="deletequestion/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+{% endblock %}

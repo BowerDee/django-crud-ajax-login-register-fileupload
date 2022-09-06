@@ -1,4 +1,7 @@
+from ast import Not
 from django.shortcuts import render, redirect
+
+from app import views
 from .models import Member, Document, Ajax, CsvUpload
 import datetime
 from django.contrib import messages
@@ -12,10 +15,12 @@ from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from crud import models
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    members = views.getMemberForIndex(request.GET.get('page'))
+    return render(request, 'index.html', {'members': members})
 
 
 @login_required
@@ -251,10 +256,27 @@ def upload_csv(request):
         messages.error(request, "Unable to upload file. " + e)
         return redirect('/upload/csv/')
 
+from django.contrib.auth import authenticate
+@login_required
+def resetPassword(request):
+    curPwd = request.POST.get('current_password')
+    user = authenticate(username=request.user.username, password= curPwd)
+    if user is None:
+        messages.success(request, "Successfully reset pwd")
+        return redirect('changePassword')
+    newPwd = request.POST.get('new_password')
+    repeatPwd = request.POST.get('repeat_password')
+    if newPwd != repeatPwd:
+        messages.success(request, "Successfully reset pwd")
+        return redirect('changePassword')
+    request.user.set_password(newPwd)
+    request.user.save()
+    return redirect('login')
 
 @login_required
 def changePassword(request):
     print('changepasword')
+    
     return render(request, 'change_password.html')
 
 

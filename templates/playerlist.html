@@ -1,0 +1,67 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Player list</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Player List
+                    <a  class="btn btn-sm btn-success" href="{% url 'createplayer' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>phone</th>
+                                <th>user name</th>
+                                <th>Created At</th>
+                                <th>last login</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for member in members %}
+                                <tr>
+                                    <td>{{ member.id }}</td>
+                                    <td>{{ member.phone }}</td>
+                                    <td>{{ member.username }}</td>
+                                    <td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>{{ member.last_login  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        <a class="btn btn-sm btn-danger" href="deleteplayer/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+{% endblock %}
