@@ -1,53 +1,6 @@
+from time import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
-#from app.views import index
-
-# Create your models here.
-
-class UploadGoodsCmd(models.Model):
-    id = models.AutoField(primary_key=True)
-    sku_id = models.CharField(max_length=16)
-    i_id = models.CharField(max_length=16)
-    brand = models.CharField(max_length=10)
-    vc_name = models.CharField(max_length=10)
-    c_name = models.CharField(max_length=10)
-    s_price = models.DecimalField(max_digits=5, decimal_places=2)
-    item_type = models.CharField(max_length=10)
-    l = models.DecimalField(max_digits=5, decimal_places=2)
-    w = models.DecimalField(max_digits=5, decimal_places=2)
-    h = models.DecimalField(max_digits=5, decimal_places=2)
-    pic = models.CharField(max_length=64)
-    pic_big = models.CharField(max_length=64)
-    sku_pic = models.CharField(max_length=64)
-    name = models.CharField(max_length=10)
-    remark = models.CharField(max_length=64)
-    properties_value = models.CharField(max_length=32)
-    short_name = models.CharField(max_length=16)
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
-    enabled = models.BooleanField()
-    supplier_name = models.CharField(max_length=16)
-    sku_code = models.CharField(max_length=20)
-    supplier_sku_id = models.CharField(max_length=16)
-    supplier_i_id = models.CharField(max_length=10)
-    other_price_1 = models.DecimalField(max_digits=5, decimal_places=2)
-    other_price_2 = models.DecimalField(max_digits=5, decimal_places=2)
-    other_price_3 = models.DecimalField(max_digits=5, decimal_places=2)
-    other_price_4 = models.DecimalField(max_digits=5, decimal_places=2)
-    other_price_5 = models.DecimalField(max_digits=5, decimal_places=2)
-    other_1 = models.CharField(max_length=16)
-    other_2 = models.CharField(max_length=16)
-    other_3 = models.CharField(max_length=16)
-    other_4 = models.CharField(max_length=16)
-    other_5 = models.CharField(max_length=16)
-    stock_disabled = models.BooleanField()
-    c_price = models.DecimalField(max_digits=5, decimal_places=2)
-    market_price = models.DecimalField(max_digits=5, decimal_places=2)
-    unit = models.CharField(max_length=10)
-
-class TestModel(models.Model):
-    id = models.AutoField(primary_key=True)
-    sku_id = models.CharField(max_length=16)
-    i_id = models.CharField(max_length=16)
 
 class VerfyModel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -57,21 +10,46 @@ class VerfyModel(models.Model):
 
 class UserInfo(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
-    phone = models.CharField(max_length=16)
-    createdate = models.DateTimeField(auto_now_add = True)
-    username = models.CharField(max_length=16)
-    USERNAME_FIELD ='id'
-    #REQUIRED_FIELDS = 'phone'
-    password = models.CharField(max_length=16)
+    phone = models.CharField(max_length=16) # 手机号码
+    createdate = models.DateTimeField(auto_now_add = True) # 创建时间
+    updatedate = models.DateTimeField(auto_now = True) # 创建时间
+    username = models.CharField(max_length=16) # 用户名称
+    USERNAME_FIELD ='id' 
+    password = models.CharField(max_length=16) # pwd
+    avator_url = models.CharField(max_length=255) # 头像链接
+
+class RoleInfo(models.Model):
+    id = models.AutoField(primary_key=True)
+    userid = models.ForeignKey('UserInfo', on_delete=models.CASCADE)
+    last_stage = models.IntegerField() # 最后一次玩的关卡
+    question_id = models.IntegerField() # 关卡题目index
+    updatedate = models.DateTimeField(auto_now = True)
+
+class Score(models.Model):
+    id = models.AutoField(primary_key=True)
+    roleid = models.ForeignKey('RoleInfo', on_delete=models.CASCADE)
+    stage = models.IntegerField() # 关卡
+    score = models.IntegerField() # 关卡得分
+
+class Brand(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=128) # 标题
+    text = models.CharField(max_length=512) # 描述
+    enable = models.BooleanField() # 是否启用
+    createdate = models.DateTimeField(auto_now_add = True) # 创建时间
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True)
-    topic = models.CharField(max_length=16) # 题目 标题
-    describtion = models.CharField(max_length=16) # 描述
-    tips = models.CharField(max_length=16) # 提示
-    qtype = models.IntegerField()
-    an_1 = models.CharField(max_length=128)
-    an_2 = models.CharField(max_length=128)
-    an_3 = models.CharField(max_length=128)
-    an_4 = models.CharField(max_length=128)
-    correct = models.CharField(max_length=16)
+    topic = models.CharField(max_length=128) # 标题
+    describtion = models.CharField(max_length=255) # 描述
+    tips = models.CharField(max_length=255) # 提示
+    qtype = models.IntegerField() # 问题类型
+    stage = models.IntegerField() # 关卡
+    score = models.IntegerField() # 分数
+    an_1 = models.CharField(max_length=255) # 选项1
+    an_2 = models.CharField(max_length=255) # 选项2
+    an_3 = models.CharField(max_length=255) # 选项3
+    an_4 = models.CharField(max_length=255) # 选项4
+    pre_index = models.IntegerField() # 前置问题
+    next_index = models.IntegerField() # 后置问题 9999 代表下一关卡
+    correct = models.CharField(max_length=16) # 正确答案
