@@ -36,6 +36,7 @@ class RoleInfo(models.Model):
     header_res = models.CharField(max_length=64, null=True, blank=True) # 头部资源
     body_res = models.CharField(max_length=64, null=True, blank=True) # 身体资源
     max_score = models.IntegerField(null=True, blank=True)
+    last_signed_time = models.DateTimeField(null=True, blank=True)
 
 # 分数记录
 class Score(models.Model):
