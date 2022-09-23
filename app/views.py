@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
 
 def getMemberForIndex(page):
-    members_list = UserInfo.objects.all()
+    members_list = AccountInfo.objects.all()
     paginator = Paginator(members_list, 5)
     try:
         members = paginator.page(page)
@@ -31,7 +31,7 @@ def index(request):
 
 @login_required
 def list(request):
-    members_list = UserInfo.objects.all()
+    members_list = AccountInfo.objects.all()
     paginator = Paginator(members_list, 5)
     page = request.GET.get('page')
     try:
@@ -45,7 +45,7 @@ def list(request):
 @login_required
 def create(request):
     if request.method == 'POST':
-        member = UserInfo(
+        member = AccountInfo(
             firstname=request.POST['firstname'],
             lastname=request.POST['lastname'],
             mobile_number=request.POST['mobile_number'],
@@ -66,13 +66,13 @@ def create(request):
 
 @login_required
 def edit(request, id):
-    members = UserInfo.objects.get(id=id)
+    members = AccountInfo.objects.get(id=id)
     context = {'members': members}
     return render(request, 'editplayer.html', context)
 
 @login_required
 def queationlist(request):
-    members_list = Question.objects.all()
+    members_list = Step.objects.all()
     paginator = Paginator(members_list, 5)
     page = request.GET.get('page')
     try:
@@ -86,7 +86,7 @@ def queationlist(request):
 @login_required
 def createquestion(request):
     if request.method == 'POST':
-        member = Question(
+        member = Step(
             firstname=request.POST['firstname'],
             lastname=request.POST['lastname'],
             mobile_number=request.POST['mobile_number'],
@@ -107,6 +107,6 @@ def createquestion(request):
 
 @login_required
 def editquestion(request, id):
-    members = Question.objects.get(id=id)
+    members = Step.objects.get(id=id)
     context = {'members': members}
     return render(request, 'editquestion.html', context)
