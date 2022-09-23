@@ -32,6 +32,9 @@
                                 <th>id</th>
                                 <th>phone</th>
                                 <th>user name</th>
+                                <th>max score</th>
+                                <th>current score</th>
+                                <th>nike name</th>
                                 <th>Created At</th>
                                 <th>last login</th>
                                 <th>Action</th>
@@ -43,6 +46,9 @@
                                     <td>{{ member.id }}</td>
                                     <td>{{ member.phone }}</td>
                                     <td>{{ member.username }}</td>
+                                    <td>{{ member.max_score }}</td>
+                                    <td>{{ member.cur_score }}</td>
+                                    <td>{{ member.nike_name }}</td>
                                     <td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>{{ member.last_login  |date:"d-m-Y H:i:s" }}</td>
                                     <td>
