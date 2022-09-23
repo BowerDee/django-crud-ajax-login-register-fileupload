@@ -73,7 +73,7 @@ def edit(request, id):
 @login_required
 def queationlist(request):
     members_list = Step.objects.all()
-    paginator = Paginator(members_list, 5)
+    paginator = Paginator(members_list, 9999)
     page = request.GET.get('page')
     try:
         members = paginator.page(page)

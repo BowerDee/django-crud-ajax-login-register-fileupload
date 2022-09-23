@@ -9,7 +9,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
+                    <a href="#">BowerDee</a>
                 </li>
                 <li class="breadcrumb-item active">Question list</li>
             </ol>
@@ -32,16 +32,17 @@
                                 <th>id</th>
                                 <th>topic</th>
                                 <th>describtion</th>
+                                <th>level</th>
                                 {% comment %} <th>Last Name</th> {% endcomment %}
                                 {% comment %} <th>Mobile Number</th> {% endcomment %}
                                 {% comment %} <th>Description</th> {% endcomment %}
                                 {% comment %} <th>Location</th> {% endcomment %}
                                 <th>tips</th>
                                 <th>type</th>
-                                <th>an_1</th>
-                                <th>an_2</th>
-                                <th>an_3</th>
-                                <th>an_4</th>
+                                <th>op_1</th>
+                                <th>op_2</th>
+                                <th>op_3</th>
+                                <th>op_4</th>
                                 <th>correct</th>
                                 <th>Action</th>
                             </tr>
@@ -52,12 +53,13 @@
                                     <td>{{ member.id }}</td>
                                     <td>{{ member.topic }}</td>
                                     <td>{{ member.describtion }}</td>
+                                    <td>{{ member.level }}</td>
                                     <td>{{ member.tips }}</td>
                                     <td>{{ member.qtype }}</td>
-                                    <td>{{ member.an_1 }}</td>
-                                    <td>{{ member.an_2 }}</td>
-                                    <td>{{ member.an_3 }}</td>
-                                    <td>{{ member.an_4 }}</td>
+                                    <td>{{ member.op_1 }}</td>
+                                    <td>{{ member.op_2 }}</td>
+                                    <td>{{ member.op_3 }}</td>
+                                    <td>{{ member.op_4 }}</td>
                                     <td>{{ member.correct}}</td>
                                     <td>
                                         <a class="btn btn-sm btn-warning" href="editquestion/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
