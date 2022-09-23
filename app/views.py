@@ -106,7 +106,7 @@ def editbrandid(request, id):
         if enable == "True" or enable == 1:
             brand.enable= 1
         else:
-            brand.enable= 1
+            brand.enable= 0
         brand.createdate=datetime.datetime.now()
         brand.save()
         messages.success(request, 'Member was created successfully!')
