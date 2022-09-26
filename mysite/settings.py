@@ -136,7 +136,7 @@ USE_TZ = True
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
