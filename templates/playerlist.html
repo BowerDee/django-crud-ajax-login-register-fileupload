@@ -30,12 +30,10 @@
                             <thead>
                             <tr>
                                 <th>role id</th>
-                                <th>phone</th>
-                                <th>user name</th>
                                 <th>max score</th>
                                 <th>current score</th>
                                 <th>nike name</th>
-                                <th>Created At</th>
+                                <th>last sign time</th>
                                 <th>last login</th>
                                 <th>user id</th>
                                 <th>Action</th>
@@ -45,13 +43,11 @@
                             {% for member in members %}
                                 <tr>
                                     <td>{{ member.id }}</td>
-                                    <td>{{ member.phone }}</td>
-                                    <td>{{ member.username }}</td>
                                     <td>{{ member.max_score }}</td>
                                     <td>{{ member.cur_score }}</td>
                                     <td>{{ member.nike_name }}</td>
-                                    <td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>{{ member.last_signed_time  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>{{ member.updatedate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>{{ member.userid_id }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
