@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 import datetime
 from django.contrib import messages
@@ -11,6 +12,21 @@ from django.http import HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+from django.conf import settings
+from jinja2 import Environment, FileSystemLoader
+from pyecharts.globals import CurrentConfig
+from django.conf import settings
+ 
+CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("{}/templates".format(settings.BASE_DIR)))
+ 
+from django.http import HttpResponse
+from pyecharts.charts import Line, Bar
+from pyecharts.globals import ThemeType
+ 
+# 图表的布局, Page垂直布局，Grid水平布局
+from pyecharts.charts import Page, Grid
 
 def getMemberForIndex(page):
     members_list = AccountInfo.objects.all()
@@ -26,7 +42,7 @@ def getMemberForIndex(page):
 @login_required
 def index(request):
     members = getMemberForIndex(request.GET.get('page'))
-    return render(request, 'index.html', {'members': members})
+    return render(request, 'index.html', {'members': members, 'charts':'111'})
 
 
 @login_required
@@ -180,3 +196,38 @@ def editquestion(request, id):
         members = Step.objects.get(id=id)
         context = {'members': members}
         return render(request, 'editquestion.html', context)
+
+@login_required
+def playercharts(request):
+    columns = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    data1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+    data2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+    page_1 = Page(layout=Page.SimplePageLayout)
+    grid1_1 = Grid(init_opts=opts.InitOpts(theme=ThemeType.ROMA, width='1600px'))
+ 
+    line = (
+        Line()
+            .set_global_opts(title_opts=opts.TitleOpts(title="test", subtitle="SUB TITLE"))
+            .add_xaxis(columns)
+            .add_yaxis("data 1", data1, symbol_size=10, is_smooth=True, color="green",
+                       markpoint_opts=opts.MarkPointOpts(data=[
+                           opts.MarkPointItem(name="最大值", type_="max"),
+                           opts.MarkPointItem(name="最小值", type_="min")]))
+            .add_yaxis("data 2", data2, symbol_size=10, is_smooth=True, color="blue")
+    )
+    bar = Bar()
+    #bar.set_global_opts(title_opts=opts.TitleOpts(title="柱状图", subtitle="一年的降水量与蒸发量"))
+    bar.add_xaxis(columns)
+    bar.add_yaxis("", data1)
+    bar.add_yaxis("", data2)
+    bar.set_series_opts(markline_opts=opts.MarkLineOpts(data=[opts.MarkLineItem(name="平均值", type_="average")]))
+    bar.set_series_opts(markpoint_opts=opts.MarkPointOpts(data=[
+        opts.MarkPointItem(name="最大值", type_="max"),
+        opts.MarkPointItem(name="最小值", type_="min")
+    ]))
+    grid1_1.add(line, grid_opts=opts.GridOpts(pos_right="55%"))
+    grid1_1.add(bar, grid_opts=opts.GridOpts(pos_left="55%"))
+    page_1.add(grid1_1)
+    return HttpResponse(page_1.render_embed())
+
+    

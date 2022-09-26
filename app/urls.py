@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^brandlist$', brandlist, name='brandlist'),
     url(r'^editbrand/(?P<id>\d+)$', editbrand, name='editbrand'),
     url(r'^editbrand/editbrandid/(?P<id>\d+)$', editbrandid, name='editbrandid'),
+    url(r'^playercharts$', playercharts, name='playercharts'),
 ]
