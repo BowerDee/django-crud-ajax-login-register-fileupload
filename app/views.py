@@ -71,7 +71,7 @@ def edit(request, id):
     return render(request, 'editplayer.html', context)
 
 @login_required
-def queationlist(request):
+def questionlist(request):
     members_list = Step.objects.all()
     paginator = Paginator(members_list, 9999)
     page = request.GET.get('page')
@@ -122,14 +122,17 @@ def editbrand(request, id):
 def createquestion(request):
     if request.method == 'POST':
         member = Step(
-            firstname=request.POST['firstname'],
-            lastname=request.POST['lastname'],
-            mobile_number=request.POST['mobile_number'],
-            description=request.POST['description'],
-            location=request.POST['location'],
-            date=request.POST['date'],
-            created_at=datetime.datetime.now(),
-            updated_at=datetime.datetime.now(), )
+            topic=request.POST['topic'],
+            describtion=request.POST['describtion'],
+            level=request.POST['level'],
+            op_1=request.POST['op_1'],
+            op_2=request.POST['op_2'],
+            op_3=request.POST['op_3'],
+            op_4=request.POST['op_4'],
+            tips=request.POST['tips'],
+            correct=request.POST['correct'],
+            step_mode =1,
+            )
         try:
             member.full_clean()
         except ValidationError as e:
@@ -161,14 +164,18 @@ def createbrand(request):
 @login_required
 def editquestion(request, id):
     if request.method == 'POST':
-        step = Step.objects.filter(id = request.POST['id']).first()
-        step.title=request.POST['title'],
-        step.text=request.POST['text'],
-        step.enable=request.POST['text'],
-        step.createdate=datetime.datetime.now()
+        step = Step.objects.filter(id = id).first()
+        step.topic=request.POST['topic']
+        step.describtion=request.POST['describtion']
+        step.tips=request.POST['tips']
+        step.op_1=request.POST['op_1']
+        step.op_2=request.POST['op_2']
+        step.op_3=request.POST['op_3']
+        step.op_4=request.POST['op_4']
+        step.correct=request.POST['correct']
         step.save()
         messages.success(request, 'Member was created successfully!')
-        return redirect('/questionlist')
+        return redirect('/queationlist')
     else:
         members = Step.objects.get(id=id)
         context = {'members': members}
