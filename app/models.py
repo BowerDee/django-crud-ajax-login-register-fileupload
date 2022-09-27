@@ -1,3 +1,4 @@
+from email.policy import default
 from time import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
@@ -35,8 +36,8 @@ class RoleInfo(models.Model):
     nike_name = models.CharField(max_length=64, null=True, blank=True) # 头部资源
     header_res = models.CharField(max_length=64, null=True, blank=True) # 头部资源
     body_res = models.CharField(max_length=64, null=True, blank=True) # 身体资源
-    max_score = models.IntegerField(null=True, blank=True)
-    cur_score = models.IntegerField(null=True, blank=True)
+    max_score = models.IntegerField(null=True, blank=True, default=0)
+    cur_score = models.IntegerField(null=True, blank=True, default=0)
     last_signed_time = models.DateTimeField(null=True, blank=True)
 
 # 分数记录
