@@ -30,7 +30,7 @@ from pyecharts.charts import Page, Grid
 
 def getMemberForIndex(page):
     members_list = AccountInfo.objects.all()
-    paginator = Paginator(members_list, 5)
+    paginator = Paginator(members_list, 65536)
     try:
         members = paginator.page(page)
     except PageNotAnInteger:

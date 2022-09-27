@@ -109,7 +109,8 @@
                                 <th>Phone</th>
                                 <th>Third id</th>
                                 <th>Username</th>
-                                <th>Age</th>
+                                <!--th>Age</th-->
+                                <!--th>Avatar</th-->
                                 <th>Create date</th>
                                 <th>Action</th>
                             </tr>
@@ -120,7 +121,8 @@
                                 <th>Phone</th>
                                 <th>Third id</th>
                                 <th>Username</th>
-                                <th>Age</th>
+                                <!--th>Age</th-->
+                                <!--th>Avatar</th-->
                                 <th>Create date</th>
                                 <th>Action</th>
                             </tr>
@@ -132,7 +134,9 @@
                                     <td>{{ member.phone }}</td>
                                     <td>{{ member.third_id }}</td>
                                     <td>{{ member.username }}</td>
-                                    <td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td>
+                                    <!--td>{{ member.avatar_url }}<-/td-->
+                                    <!--img src="avatar/{member.third_id}}.png"/-->
+                                    <!--td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td-->
                                     <td>{{ member.last_login  |date:"d-m-Y H:i:s" }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
