@@ -136,7 +136,7 @@ USE_TZ = True
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -166,3 +166,5 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
+
+X_FRAME_OPTIONS = 'ALLOWALL url'

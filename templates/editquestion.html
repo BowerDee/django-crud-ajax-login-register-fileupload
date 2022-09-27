@@ -19,7 +19,7 @@
                     Question Add
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" action="updatequestion/{{ members.id }}" method="POST">
+                    <form class="form-horizontal" action="editquestionid/{{ members.id }}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="form-row">
@@ -37,18 +37,18 @@
                             </div>
                         </div>
                     </div>
-                    {% comment %} <div class="form-group">
+                    <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.description }}" name="description" placeholder="Description" id="inputdescription" required>
-                                    <label for="inputdescription">Description</label>
+                                    <input type="text" class="form-control" value="{{ members.tips }}" name="tips" placeholder="tips" id="inputdescription" required>
+                                    <label for="inputdescription">tips</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input class="form-control" type="tel" value="{{ members.mobile_number }}" name="mobile_number" placeholder="Mobile Number" id="inputMobile">
-                                    <label for="inputMobile">Mobile Number</label>
+                                    <input class="form-control" type="text" value="{{ members.op_1 }}" name="op_1" placeholder="op_1" id="inputMobile">
+                                    <label for="inputMobile">op_1</label>
                                 </div>
                             </div>
                         </div>
@@ -57,18 +57,34 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input class="form-control" type="date" name="date" value="{{ members.date }}" id="dateInput">
-                                    <label for="dateInput">Enter Emp ID</label>
+                                    <input type="text" class="form-control" value="{{ members.op_2 }}" name="op_2" placeholder="op_2" id="inputdescription" required>
+                                    <label for="inputdescription">op_2</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" id="inputLoca" class="form-control" value="{{ members.date }}"  placeholder="Enter Location" required="">
-                                    <label for="inputLoca">Enter Location</label>
+                                    <input class="form-control" type="text" value="{{ members.op_3 }}" name="op_3" placeholder="op_3" id="inputMobile">
+                                    <label for="inputMobile">op_3</label>
                                 </div>
                             </div>
                         </div>
-                    </div> {% endcomment %}
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" value="{{ members.op_4 }}" name="op_4" placeholder="op_4" id="inputdescription" required>
+                                    <label for="inputdescription">op_4</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input class="form-control" type="text" value="{{ members.correct }}" name="correct" placeholder="correct" id="inputMobile">
+                                    <label for="inputMobile">correct</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
                 </div>

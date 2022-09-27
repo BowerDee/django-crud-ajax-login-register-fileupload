@@ -9,15 +9,15 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
+                    <a href="#">BowerDee</a>
                 </li>
-                <li class="breadcrumb-item active">Player list</li>
+                <li class="breadcrumb-item active">Brand list</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Player List
-                    <a  class="btn btn-sm btn-success" href="{% url 'createplayer' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+                    Brand List
+                    <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
                 </div>
                 <div class="card-body">
                     {% for message in messages %}
@@ -29,13 +29,11 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>role id</th>
-                                <th>max score</th>
-                                <th>current score</th>
-                                <th>nike name</th>
-                                <th>last sign time</th>
-                                <th>last login</th>
-                                <th>user id</th>
+                                <th>id</th>
+                                <th>title</th>
+                                <th>text</th>
+                                <th>enable</th>
+                                <th>create date</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -43,15 +41,13 @@
                             {% for member in members %}
                                 <tr>
                                     <td>{{ member.id }}</td>
-                                    <td>{{ member.max_score }}</td>
-                                    <td>{{ member.cur_score }}</td>
-                                    <td>{{ member.nike_name }}</td>
-                                    <td>{{ member.last_signed_time  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ member.updatedate  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ member.userid_id }}</td>
+                                    <td>{{ member.title }}</td>
+                                    <td>{{ member.text }}</td>
+                                    <td>{{ member.enable }}</td>
+                                    <td>{{ member.createdate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
-                                        <a class="btn btn-sm btn-danger" href="deleteplayer/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                        <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
                                     </td>
                                 </tr>
                             {% endfor %}

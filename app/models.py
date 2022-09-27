@@ -15,15 +15,15 @@ class AccountInfo(AbstractBaseUser):
     #phone = models.CharField(max_length=16) # 手机号码
     createdate = models.DateTimeField(auto_now_add = True) # 创建时间
     updatedate = models.DateTimeField(auto_now = True) # 创建时间
-    username = models.CharField(max_length=16) # 三方平台名称
+    username = models.CharField(max_length=64) # 三方平台名称
     #third_name = models.CharField(max_length=16) # 三方平台名称
-    third_id = models.CharField(max_length=16) # 三方平台ID
+    third_id = models.CharField(max_length=128) # 三方平台ID
     USERNAME_FIELD ='id'
-    password = models.CharField(max_length=16) # pwd
+    password = models.CharField(max_length=64) # pwd
     avatar_url = models.CharField(max_length=255, null=True, blank=True) # 头像链接
-    country = models.CharField(max_length=32, null=True, blank=True) # 国家
-    province = models.CharField(max_length=32, null=True, blank=True) # 省
-    city = models.CharField(max_length=32, null=True, blank=True) # 市
+    country = models.CharField(max_length=64, null=True, blank=True) # 国家
+    province = models.CharField(max_length=64, null=True, blank=True) # 省
+    city = models.CharField(max_length=64, null=True, blank=True) # 市
 
 # 角色属性
 class RoleInfo(models.Model):

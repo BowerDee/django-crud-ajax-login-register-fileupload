@@ -7,6 +7,12 @@ urlpatterns = [
     url(r'^playerlist$', list, name='playerlist'),
     url(r'^editplayer/(?P<id>\d+)$', edit, name='editplayer'),
     url(r'^createquestion$', createquestion, name='createquestion'),
-    url(r'^queationlist$', queationlist, name='queationlist'),
+    url(r'^createbrand$', createbrand, name='createbrand'),
+    url(r'^questionlist$', questionlist, name='questionlist'),
     url(r'^editquestion/(?P<id>\d+)$', editquestion, name='editquestion'),
+    url(r'^editquestion/editquestionid/(?P<id>\d+)$', editquestion, name='editquestionid'),
+    url(r'^brandlist$', brandlist, name='brandlist'),
+    url(r'^editbrand/(?P<id>\d+)$', editbrand, name='editbrand'),
+    url(r'^editbrand/editbrandid/(?P<id>\d+)$', editbrandid, name='editbrandid'),
+    url(r'^playercharts$', playercharts, name='playercharts'),
 ]

@@ -276,7 +276,6 @@ def resetPassword(request):
 @login_required
 def changePassword(request):
     print('changepasword')
-    
     return render(request, 'change_password.html')
 
 
