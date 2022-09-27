@@ -87,6 +87,18 @@ def edit(request, id):
     return render(request, 'editplayer.html', context)
 
 @login_required
+def deleteaccount(request, id):
+    members = AccountInfo.objects.get(id=id)
+    members.delete()
+    return render(request, 'index.html', {'members': members})
+
+@login_required
+def deleteplayer(request, id):
+    members = RoleInfo.objects.get(id=id)
+    members.delete()
+    return redirect('/playerlist')
+
+@login_required
 def questionlist(request):
     members_list = Step.objects.all()
     paginator = Paginator(members_list, 9999)
