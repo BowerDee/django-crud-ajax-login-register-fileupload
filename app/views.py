@@ -18,7 +18,8 @@ from django.conf import settings
 from jinja2 import Environment, FileSystemLoader
 from pyecharts.globals import CurrentConfig
 from django.conf import settings
- 
+from datetime import datetime, timedelta
+
 CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("{}/templates".format(settings.BASE_DIR)))
  
 from django.http import HttpResponse
@@ -211,34 +212,43 @@ def editquestion(request, id):
 
 @login_required
 def playercharts(request):
-    columns = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    data1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-    data2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+    initialToday = datetime.today()
+    columns = []
+    data1 = []
+    for i in range(10):
+        columns.append(initialToday.strftime("%y-%m-%d"))
+        obj = LoginCount.objects.filter(login_date__range=[initialToday - timedelta(days=1), initialToday])
+        data1.append(len(obj))
+        initialToday = initialToday - timedelta(days=1)
+    #obj  = LoginCount.objects.filter(login_date__month=9)
+    # columns = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    # data1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+    #data2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     page_1 = Page(layout=Page.SimplePageLayout)
     grid1_1 = Grid(init_opts=opts.InitOpts(theme=ThemeType.ROMA, width='1600px'))
  
     line = (
         Line()
-            .set_global_opts(title_opts=opts.TitleOpts(title="test", subtitle="SUB TITLE"))
+            .set_global_opts(title_opts=opts.TitleOpts(title="Active User", subtitle=""))
             .add_xaxis(columns)
-            .add_yaxis("data 1", data1, symbol_size=10, is_smooth=True, color="green",
+            .add_yaxis("Active User count", data1, symbol_size=10, is_smooth=True, color="green",
                        markpoint_opts=opts.MarkPointOpts(data=[
-                           opts.MarkPointItem(name="最大值", type_="max"),
-                           opts.MarkPointItem(name="最小值", type_="min")]))
-            .add_yaxis("data 2", data2, symbol_size=10, is_smooth=True, color="blue")
+                           opts.MarkPointItem(name="max", type_="max"),
+                           opts.MarkPointItem(name="min", type_="min")]))
+            #.add_yaxis("data 2", data2, symbol_size=10, is_smooth=True, color="blue")
     )
     bar = Bar()
     #bar.set_global_opts(title_opts=opts.TitleOpts(title="柱状图", subtitle="一年的降水量与蒸发量"))
     bar.add_xaxis(columns)
     bar.add_yaxis("", data1)
-    bar.add_yaxis("", data2)
-    bar.set_series_opts(markline_opts=opts.MarkLineOpts(data=[opts.MarkLineItem(name="平均值", type_="average")]))
+    #bar.add_yaxis("", data2)
+    bar.set_series_opts(markline_opts=opts.MarkLineOpts(data=[opts.MarkLineItem(name="average", type_="average")]))
     bar.set_series_opts(markpoint_opts=opts.MarkPointOpts(data=[
-        opts.MarkPointItem(name="最大值", type_="max"),
-        opts.MarkPointItem(name="最小值", type_="min")
+        opts.MarkPointItem(name="max", type_="max"),
+        opts.MarkPointItem(name="min", type_="min")
     ]))
-    grid1_1.add(line, grid_opts=opts.GridOpts(pos_right="55%"))
-    grid1_1.add(bar, grid_opts=opts.GridOpts(pos_left="55%"))
+    grid1_1.add(line, grid_opts=opts.GridOpts(pos_right="0%"))
+    #grid1_1.add(bar, grid_opts=opts.GridOpts(pos_left="55%"))
     page_1.add(grid1_1)
     return HttpResponse(page_1.render_embed())
 

@@ -101,3 +101,12 @@ class Step(models.Model):
     op_3 = models.CharField(max_length=255,null=True, blank=True) # 选项3
     op_4 = models.CharField(max_length=255,null=True, blank=True) # 选项4
     correct = models.CharField(max_length=16,null=True, blank=True) # 正确答案
+
+class LoginCount(models.Model):
+    id = models.AutoField(primary_key=True)
+    uid = models.IntegerField(null=True, blank=True)
+    ip = models.CharField(max_length=32,null=True, blank=True) # 标题
+    country = models.CharField(max_length=64, null=True, blank=True) # 国家
+    province = models.CharField(max_length=64, null=True, blank=True) # 省
+    city = models.CharField(max_length=64, null=True, blank=True) # 市
+    login_date = models.DateTimeField(auto_now = True, null=True, blank=True) # 创建时间
