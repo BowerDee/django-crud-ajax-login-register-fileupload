@@ -216,8 +216,9 @@ def playercharts(request):
     columns = []
     data1 = []
     for i in range(10):
-        columns.append(initialToday.strftime("%y-%m-%d"))
-        obj = LoginCount.objects.filter(login_date__range=[initialToday - timedelta(days=1), initialToday])
+        start = initialToday#
+        columns.append(start.strftime("%y-%m-%d"))
+        obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)])
         data1.append(len(obj))
         initialToday = initialToday - timedelta(days=1)
     #obj  = LoginCount.objects.filter(login_date__month=9)
