@@ -210,13 +210,16 @@ def editquestion(request, id):
         context = {'members': members}
         return render(request, 'editquestion.html', context)
 
+from django.utils import timezone
 @login_required
 def playercharts(request):
-    initialToday = datetime.today()
+    initialToday = timezone.now()
+    #initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day)
+    print(initialToday)
     columns = []
     data1 = []
     for i in range(10):
-        start = initialToday#
+        start = initialToday
         columns.append(start.strftime("%y-%m-%d"))
         obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)])
         data1.append(len(obj))
