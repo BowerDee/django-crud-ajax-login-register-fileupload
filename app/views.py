@@ -69,8 +69,8 @@ def create(request):
             description=request.POST['description'],
             location=request.POST['location'],
             date=request.POST['date'],
-            created_at=datetime.datetime.now(),
-            updated_at=datetime.datetime.now(), )
+            created_at=datetime.now(),
+            updated_at=datetime.now(), )
         try:
             member.full_clean()
         except ValidationError as e:
@@ -94,10 +94,22 @@ def deleteaccount(request, id):
     return render(request, 'index.html', {'members': members})
 
 @login_required
+def deleteBrand(request, id):
+    members = Brand.objects.get(id=id)
+    members.delete()
+    return redirect('brandlist')
+
+@login_required
 def deleteplayer(request, id):
     members = RoleInfo.objects.get(id=id)
     members.delete()
     return redirect('/playerlist')
+
+@login_required
+def deletequestion(request, id):
+    members = Step.objects.get(id=id)
+    members.delete()
+    return redirect('/questionlist')
 
 @login_required
 def questionlist(request):
@@ -136,10 +148,20 @@ def editbrandid(request, id):
             brand.enable= 1
         else:
             brand.enable= 0
-        brand.createdate=datetime.datetime.now()
+        brand.createdate=datetime.now()
         brand.save()
         messages.success(request, 'Member was created successfully!')
         return redirect('/brandlist')
+
+@login_required
+def editplayerinfo(request, id):
+    if request.method == 'POST':
+        account = AccountInfo.objects.filter(id = id).first()
+        account.phone=request.POST['phone']
+        account.username=request.POST['username']
+        account.save()
+        messages.success(request, 'Member was created successfully!')
+        return redirect('/playerlist')
 
 @login_required
 def editbrand(request, id):
@@ -179,7 +201,7 @@ def createbrand(request):
             title=request.POST['title'],
             text=request.POST['text'],
             enable=request.POST['enable'],
-            createdate=datetime.datetime.now(), )
+            createdate=datetime.now(), )
         try:
             member.full_clean()
         except ValidationError as e:
@@ -204,7 +226,7 @@ def editquestion(request, id):
         step.correct=request.POST['correct']
         step.save()
         messages.success(request, 'Member was created successfully!')
-        return redirect('/queationlist')
+        return redirect('/questionlist')
     else:
         members = Step.objects.get(id=id)
         context = {'members': members}

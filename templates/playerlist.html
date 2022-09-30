@@ -17,7 +17,7 @@
                 <div class="card-header">
                     <i class="fas fa-table"></i>
                     Player List
-                    <a  class="btn btn-sm btn-success" href="{% url 'createplayer' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+                    {% comment %} <a  class="btn btn-sm btn-success" href="{% url 'createplayer' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a> {% endcomment %}
                 </div>
                 <div class="card-body">
                     {% for message in messages %}
@@ -50,7 +50,7 @@
                                     <td>{{ member.updatedate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>{{ member.userid_id }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        {% comment %} <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a> {% endcomment %}
                                         <a class="btn btn-sm btn-danger" href="deleteplayer/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
                                     </td>
                                 </tr>
