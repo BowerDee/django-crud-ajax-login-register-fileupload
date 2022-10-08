@@ -17,4 +17,7 @@ urlpatterns = [
     url(r'^editbrand/(?P<id>\d+)$', editbrand, name='editbrand'),
     url(r'^editbrand/editbrandid/(?P<id>\d+)$', editbrandid, name='editbrandid'),
     url(r'^playercharts$', playercharts, name='playercharts'),
+    url(r'^editplayer/editplayerinfo/(?P<id>\d+)$', editplayerinfo, name='editplayerinfo'),
+    url(r'^deletebrand/(?P<id>\d+)$', deleteBrand, name='deletebrand'),
+    url(r'^deletequestion/(?P<id>\d+)$', deletequestion, name='deletequestion'),
 ]
