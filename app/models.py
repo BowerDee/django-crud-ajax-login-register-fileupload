@@ -49,6 +49,8 @@ class Score(models.Model):
     level = models.IntegerField() # 关卡
     #step_id = models.IntegerField(null=True, blank=True) # 此关卡当前的 step ID
     score = models.IntegerField(null=True, blank=True) # 关卡得分
+    update_time = models.DateTimeField(auto_now = True, null=True, blank=True) # 创建时间
+    time_consume = models.IntegerField(null=True, blank=True, default=0)
 
 # 公告
 class Brand(models.Model):

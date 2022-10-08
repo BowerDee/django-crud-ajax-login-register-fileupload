@@ -161,6 +161,8 @@ def createquestion(request):
             tips=request.POST['tips'],
             correct=request.POST['correct'],
             step_mode =1,
+            is_skip = False,
+            qtype = 1
             )
         try:
             member.full_clean()
