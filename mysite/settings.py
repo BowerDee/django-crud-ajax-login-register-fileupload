@@ -95,6 +95,7 @@ DATABASES = {
         'PASSWORD': 'root',  # 密码
         'HOST': '127.0.0.1',  # mysql服务所在的主机ip
         'PORT': '3306',         # mysql服务端口
+        'OPTIONS':{'charset':'utf8mb4'}
     }
 }
 
