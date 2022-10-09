@@ -44,7 +44,7 @@
                                     <td>{{ member.title }}</td>
                                     <td>{{ member.text }}</td>
                                     <td>{{ member.enable }}</td>
-                                    <td>{{ member.createdate  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>{{ member.createdate  |date:"Y-m-d H:i:s" }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> 编辑</a>
                                         <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a>

@@ -58,8 +58,8 @@
                                     <td>{{ member.max_score }}</td>
                                     <td>{{ member.cur_score }}</td>
                                     <td>{{ member.nike_name }}</td>
-                                    <td>{{ member.last_signed_time  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ member.updatedate  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>{{ member.last_signed_time  |date:"Y-m-d H:i:s" }}</td>
+                                    <td>{{ member.updatedate  |date:"Y-m-d H:i:s" }}</td>
                                     <td>{{ member.userid_id }}</td>
                                     <td>
                                         {% comment %} <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a> {% endcomment %}
