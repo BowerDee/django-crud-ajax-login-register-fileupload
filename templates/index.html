@@ -105,6 +105,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
+                                <th>头像</th>
                                 <th>账户ID</th>
                                 <th>手机</th>
                                 <th>三方ID</th>
@@ -117,6 +118,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>头像</th>
                                     <th>账户ID</th>
                                     <th>手机</th>
                                     <th>三方ID</th>
@@ -130,6 +132,7 @@
                             <tbody>
                                 {% for member in members %}
                                 <tr>
+                                    <td><img src="https://slbpark.liangzimodel.com:8084/resource/avatar/{{member.third_id}}.png" /></td>
                                     <td>{{ member.id }}</td>
                                     <td>{{ member.phone }}</td>
                                     <td>{{ member.third_id }}</td>
