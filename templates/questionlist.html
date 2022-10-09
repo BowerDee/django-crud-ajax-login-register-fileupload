@@ -11,12 +11,12 @@
                 <li class="breadcrumb-item">
                     <a href="#">BowerDee</a>
                 </li>
-                <li class="breadcrumb-item active">Question list</li>
+                <li class="breadcrumb-item active">题库</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Question List
+                    题库
                     <a  class="btn btn-sm btn-success" href="{% url 'createquestion' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
                 </div>
                 <div class="card-body">
@@ -29,22 +29,22 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>id</th>
-                                <th>topic</th>
-                                <th>describtion</th>
-                                <th>level</th>
+                                <th>编号</th>
+                                <th>标题</th>
+                                <th>描述</th>
+                                <th>所属关卡</th>
                                 {% comment %} <th>Last Name</th> {% endcomment %}
                                 {% comment %} <th>Mobile Number</th> {% endcomment %}
                                 {% comment %} <th>Description</th> {% endcomment %}
                                 {% comment %} <th>Location</th> {% endcomment %}
-                                <th>tips</th>
-                                <th>type</th>
-                                <th>op_1</th>
-                                <th>op_2</th>
-                                <th>op_3</th>
-                                <th>op_4</th>
-                                <th>correct</th>
-                                <th>Action</th>
+                                <th>提示</th>
+                                <th>类型</th>
+                                <th>选项1</th>
+                                <th>选项2</th>
+                                <th>选项3</th>
+                                <th>选项4</th>
+                                <th>答案</th>
+                                <th>动作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -62,8 +62,8 @@
                                     <td>{{ member.op_4 }}</td>
                                     <td>{{ member.correct}}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-warning" href="editquestion/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
-                                        <a class="btn btn-sm btn-danger" href="deletequestion/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                        <a class="btn btn-sm btn-warning" href="editquestion/{{ member.id }}"> <span class="fa fa-edit"></span> 编辑</a>
+                                        <a class="btn btn-sm btn-danger" href="deletequestion/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a>
                                     </td>
                                 </tr>
                             {% endfor %}

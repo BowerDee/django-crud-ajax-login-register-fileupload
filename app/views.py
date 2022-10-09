@@ -257,12 +257,12 @@ def playercharts(request):
  
     line = (
         Line()
-            .set_global_opts(title_opts=opts.TitleOpts(title="Active User", subtitle=""))
+            .set_global_opts(title_opts=opts.TitleOpts(title="活跃玩家", subtitle=""))
             .add_xaxis(columns)
-            .add_yaxis("Active User count", data1, symbol_size=10, is_smooth=True, color="green",
+            .add_yaxis("活跃玩家", data1, symbol_size=10, is_smooth=True, color="green",
                        markpoint_opts=opts.MarkPointOpts(data=[
-                           opts.MarkPointItem(name="max", type_="max"),
-                           opts.MarkPointItem(name="min", type_="min")]))
+                           opts.MarkPointItem(name="最大", type_="max"),
+                           opts.MarkPointItem(name="最小", type_="min")]))
             #.add_yaxis("data 2", data2, symbol_size=10, is_smooth=True, color="blue")
     )
     bar = Bar()
@@ -272,8 +272,8 @@ def playercharts(request):
     #bar.add_yaxis("", data2)
     bar.set_series_opts(markline_opts=opts.MarkLineOpts(data=[opts.MarkLineItem(name="average", type_="average")]))
     bar.set_series_opts(markpoint_opts=opts.MarkPointOpts(data=[
-        opts.MarkPointItem(name="max", type_="max"),
-        opts.MarkPointItem(name="min", type_="min")
+        opts.MarkPointItem(name="最大", type_="max"),
+        opts.MarkPointItem(name="最小", type_="min")
     ]))
     grid1_1.add(line, grid_opts=opts.GridOpts(pos_right="0%"))
     #grid1_1.add(bar, grid_opts=opts.GridOpts(pos_left="55%"))

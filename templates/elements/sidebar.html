@@ -6,7 +6,7 @@
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+                <span>仪表盘</span>
             </a>
         </li>
         {% comment %} <li class="nav-item">
@@ -18,19 +18,19 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'playerlist' %}">
                 <i class="fas fa-fw fa-database"></i>
-                <span>Player list</span>
+                <span>角色列表</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'questionlist' %}">
                 <i class="fas fa-fw fa-database"></i>
-                <span>Questions lib</span>
+                <span>题库</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'brandlist' %}">
                 <i class="fas fa-fw fa-database"></i>
-                <span>Brand list</span>
+                <span>公告</span>
             </a>
         </li>
         {% comment %} <li class="nav-item">
@@ -48,21 +48,21 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Users</span>
+                <span>用户</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                <a class="dropdown-item" href="{% url 'users' %}">User List</a>
+                <a class="dropdown-item" href="{% url 'users' %}">用户列表</a>
             </div>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-file"></i>
-                <span>More Feature</span>
+                <span>更多属性</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 {% comment %} <a class="dropdown-item" href="{% url 'upload_csv' %}">CSV Import</a> {% endcomment %}
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'changePassword' %}">Change Password</a>
+                <a class="dropdown-item" href="{% url 'changePassword' %}">修改密码</a>
             </div>
         </li>
     </ki>

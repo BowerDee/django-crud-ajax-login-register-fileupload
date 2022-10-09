@@ -11,13 +11,13 @@
                 <li class="breadcrumb-item">
                     <a href="#">BowerDee</a>
                 </li>
-                <li class="breadcrumb-item active">Brand list</li>
+                <li class="breadcrumb-item active">公告列表</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Brand List
-                    <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+                    公告列表
+                    <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">增加</a>
                 </div>
                 <div class="card-body">
                     {% for message in messages %}
@@ -29,12 +29,12 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>id</th>
-                                <th>title</th>
-                                <th>text</th>
-                                <th>enable</th>
-                                <th>create date</th>
-                                <th>Action</th>
+                                <th>编号</th>
+                                <th>标题</th>
+                                <th>公告内容</th>
+                                <th>开启</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,8 +46,8 @@
                                     <td>{{ member.enable }}</td>
                                     <td>{{ member.createdate  |date:"d-m-Y H:i:s" }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
-                                        <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                        <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> 编辑</a>
+                                        <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a>
                                     </td>
                                 </tr>
                             {% endfor %}

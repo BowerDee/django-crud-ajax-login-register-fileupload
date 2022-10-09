@@ -17,9 +17,9 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
+                    <a href="#">BoerDee</a>
                 </li>
-                <li class="breadcrumb-item active">Overview</li>
+                <li class="breadcrumb-item active">总览</li>
             </ol>
 
             <!-- Icon Cards-->
@@ -105,27 +105,27 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Uid</th>
-                                <th>Phone</th>
-                                <th>Third id</th>
-                                <th>Username</th>
+                                <th>账户ID</th>
+                                <th>手机</th>
+                                <th>三方ID</th>
+                                <th>用户名</th>
                                 <!--th>Age</th-->
                                 <!--th>Avatar</th-->
-                                <th>Create date</th>
+                                <th>最后登录时间</th>
                                 <!--th>Action</th-->
                             </tr>
                             </thead>
                             <tfoot>
-                            <tr>
-                                <th>Uid</th>
-                                <th>Phone</th>
-                                <th>Third id</th>
-                                <th>Username</th>
-                                <!--th>Age</th-->
-                                <!--th>Avatar</th-->
-                                <th>Create date</th>
-                                <!--th>Action</th-->
-                            </tr>
+                                <tr>
+                                    <th>账户ID</th>
+                                    <th>手机</th>
+                                    <th>三方ID</th>
+                                    <th>用户名</th>
+                                    <!--th>Age</th-->
+                                    <!--th>Avatar</th-->
+                                    <th>最后登录时间</th>
+                                    <!--th>Action</th-->
+                                </tr>
                             </tfoot>
                             <tbody>
                                 {% for member in members %}
@@ -148,7 +148,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                {% comment %} <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> {% endcomment %}
             </div>
 
         </div>
@@ -158,7 +158,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © BowDee 2022</span>
+                    <span>Copyright © BowerDee 2022</span>
                 </div>
             </div>
         </footer>
