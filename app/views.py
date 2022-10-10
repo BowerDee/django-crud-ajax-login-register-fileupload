@@ -238,13 +238,13 @@ from django.utils import timezone
 @login_required
 def playercharts(request):
     initialToday = timezone.now()
-    #initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day)
-    print(initialToday)
+    initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day, tzinfo = initialToday.tzinfo)
     columns = []
     data1 = []
     for i in range(10):
         start = initialToday
         columns.append(start.strftime("%y-%m-%d"))
+        #print(start, initialToday + timedelta(days=1))
         obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)])
         data1.append(len(obj))
         initialToday = initialToday - timedelta(days=1)
