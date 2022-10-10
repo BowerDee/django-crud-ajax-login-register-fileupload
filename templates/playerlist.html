@@ -34,7 +34,7 @@
                                 <th>当前积分</th>
                                 <th>昵称</th>
                                 <th>最后签到时间</th>
-                                <th>最后登录时间</th>
+                                <!--th>最后登录时间</th-->
                                 <th>账户ID</th>
                                 <th>操作</th>
                             </tr>
@@ -59,7 +59,7 @@
                                     <td>{{ member.cur_score }}</td>
                                     <td>{{ member.nike_name }}</td>
                                     <td>{{ member.last_signed_time  |date:"Y-m-d H:i:s" }}</td>
-                                    <td>{{ member.updatedate  |date:"Y-m-d H:i:s" }}</td>
+                                    <!--td>{{ member.updatedate  |date:"Y-m-d H:i:s" }}</td=-->
                                     <td>{{ member.userid_id }}</td>
                                     <td>
                                         {% comment %} <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a> {% endcomment %}
