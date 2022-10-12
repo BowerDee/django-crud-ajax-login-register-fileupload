@@ -19,6 +19,7 @@ from jinja2 import Environment, FileSystemLoader
 from pyecharts.globals import CurrentConfig
 from django.conf import settings
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("{}/templates".format(settings.BASE_DIR)))
  
@@ -234,7 +235,6 @@ def editquestion(request, id):
         context = {'members': members}
         return render(request, 'editquestion.html', context)
 
-from django.utils import timezone
 @login_required
 def playercharts(request):
     initialToday = timezone.now()
