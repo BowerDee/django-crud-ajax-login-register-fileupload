@@ -9,14 +9,14 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Question</a>
+                    <a href="#">BowerDee</a>
                 </li>
-                <li class="breadcrumb-item active">Add</li>
+                <li class="breadcrumb-item active">修改</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Question Add
+                    修改问题
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="editquestionid/{{ members.id }}" method="POST">
@@ -24,15 +24,15 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.topic }}" name="topic" placeholder="topic" id="inputFirst" required>
-                                    <label for="inputFirst">topic</label>
+                                <div>
+                                    <input type="text" class="form-control" value="{{ members.topic }}" name="topic" placeholder="标题" id="inputFirst" required>
+                                    <!--label for="inputFirst">标题</label-->
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.describtion }}" name="describtion" placeholder="describtion" id="inputLast" required>
-                                    <label for="inputLast">describtion</label>
+                                <div>
+                                    <input type="text" class="form-control" value="{{ members.describtion }}" name="describtion" placeholder="描述" id="inputLast" required>
+                                    <!--label for="inputLast">描述</label-->
                                 </div>
                             </div>
                         </div>
@@ -40,15 +40,15 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.tips }}" name="tips" placeholder="tips" id="inputdescription" required>
-                                    <label for="inputdescription">tips</label>
+                                <div>
+                                    <input type="text" class="form-control" value="{{ members.tips }}" name="tips" placeholder="提示" id="inputdescription" required>
+                                    <!--label for="inputdescription">提示</label-->
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-label-group">
+                                <div>
                                     <input class="form-control" type="text" value="{{ members.op_1 }}" name="op_1" placeholder="op_1" id="inputMobile">
-                                    <label for="inputMobile">op_1</label>
+                                    <!--label for="inputMobile">op_1</label-->
                                 </div>
                             </div>
                         </div>
@@ -56,15 +56,15 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-label-group">
+                                <div>
                                     <input type="text" class="form-control" value="{{ members.op_2 }}" name="op_2" placeholder="op_2" id="inputdescription" required>
-                                    <label for="inputdescription">op_2</label>
+                                    <!--label for="inputdescription">op_2</label-->
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-label-group">
+                                <div>
                                     <input class="form-control" type="text" value="{{ members.op_3 }}" name="op_3" placeholder="op_3" id="inputMobile">
-                                    <label for="inputMobile">op_3</label>
+                                    <!--label for="inputMobile">op_3</label-->
                                 </div>
                             </div>
                         </div>
@@ -72,20 +72,26 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-label-group">
+                                <div>
                                     <input type="text" class="form-control" value="{{ members.op_4 }}" name="op_4" placeholder="op_4" id="inputdescription" required>
-                                    <label for="inputdescription">op_4</label>
+                                    <!--label for="inputdescription">op_4</label-->
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input class="form-control" type="text" value="{{ members.correct }}" name="correct" placeholder="correct" id="inputMobile">
-                                    <label for="inputMobile">correct</label>
+                                <div>
+                                    <input class="form-control" type="text" value="{{ members.correct }}" name="correct" placeholder="答案" id="inputMobile" list=typelist_op>
+                                    <datalist id="typelist_op">
+                                        <option>op_1</option>
+                                        <option>op_2</option>
+                                        <option>op_3</option>
+                                        <option>op_4</option>
+                                    </datalist>
+                                    <!--label for="inputMobile">答案</label-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+                    <button class="btn btn-primary btn-block" type="submit">提交 &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
                 </div>
             </div>
