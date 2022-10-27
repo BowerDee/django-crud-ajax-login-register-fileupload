@@ -26,7 +26,7 @@ CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("{}/templates".fo
 from django.http import HttpResponse
 from pyecharts.charts import Line, Bar
 from pyecharts.globals import ThemeType
- 
+from .util import *
 # 图表的布局, Page垂直布局，Grid水平布局
 from pyecharts.charts import Page, Grid
 
@@ -124,7 +124,18 @@ def questionlist(request):
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
     return render(request, 'questionlist.html', {'members': members})
-
+@login_required
+def scorelist(request):
+    members_list = Step.objects.all()
+    paginator = Paginator(members_list, 9999)
+    page = request.GET.get('page')
+    try:
+        members = paginator.page(page)
+    except PageNotAnInteger:
+        members = paginator.page(1)
+    except EmptyPage:
+        members = paginator.page(paginator.num_pages)
+    return render(request, 'scorelist.html', {'members': getScoreSum()})
 @login_required
 def brandlist(request):
     members_list = Brand.objects.all()
