@@ -1,3 +1,4 @@
+from calendar import month
 from enum import Enum
 from .models import *
 
@@ -7,6 +8,8 @@ from .models import RoleInfo, Step,Score, Dynasty, Stage, Level, AccountInfo
 from django.db.models import Sum
 from enum import Enum
 from .ThirdParty.dss.Serializer import serializer
+from datetime import datetime, timedelta
+from django import utils 
 
 def getScoreSum():
     roleIDlist = Score.objects.filter().values('roleid').distinct()
@@ -26,6 +29,33 @@ def getScoreSum():
     print(ret)
     ret = sorted(ret, key=lambda item:item['score'], reverse=True)#[0:10]
     return ret
+
+def getUserCount_day():
+    initialToday = utils.timezone.now()
+    initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day, tzinfo = initialToday.tzinfo)
+    obj = getUserCount(initialToday, initialToday  + timedelta(days=1))
+    return obj
+
+def getUserCount_week():
+    initialToday = utils.timezone.now()
+    initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day, tzinfo = initialToday.tzinfo)
+    obj = getUserCount(initialToday - timedelta(weeks=1), initialToday)
+    return obj
+
+def getUserCount_month():
+    initialToday = utils.timezone.now()
+    initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day, tzinfo = initialToday.tzinfo)
+    obj = getUserCount(initialToday - timedelta(days=31),initialToday)
+    return obj
+
+def getUserCount(start, end):
+    obj = LoginCount.objects.filter(login_date__range=[start, end]).values('uid').distinct().count()
+    return obj
+
+def getAccountSize():
+    accounInfo = AccountInfo.objects.count()
+    return accounInfo
+        
 
 class E_Stage(Enum):
     E_Stage_None = 0

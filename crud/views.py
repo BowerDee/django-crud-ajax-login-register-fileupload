@@ -16,12 +16,13 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from crud import models
+from app.util import *
 
 @login_required
 def index(request):
     members = views.getMemberForIndex(request.GET.get('page'))
     #return render(request, 'index.html', {'members': members})
-    return render(request, 'index.html', {'members': members, 'charts':'111', 'v1':1,'v2':2,'v3':3,'v4':4})
+    return render(request, 'index.html', {'members': members, 'charts':'111', 'v1':getUserCount_day(),'v2':getUserCount_week(),'v3':getUserCount_month(),'v4':getAccountSize()})
 
 
 @login_required
