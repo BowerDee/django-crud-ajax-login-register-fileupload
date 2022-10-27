@@ -40,9 +40,12 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.enable }}" name="enable" placeholder="开启" id="inputdescription" required>
-                                    <label for="inputdescription">开启</label>
+                                <div>
+                                    <input type="text" class="form-control" name="enable" placeholder="下拉选择开启/禁用" id="inputdescription_brand_enable" list="typelist" required>
+                                    <datalist id="typelist">
+                                        <option>启用</option>
+                                        <option>禁用</option>
+                                    </datalist>
                                 </div>
                             </div>
                         </div>

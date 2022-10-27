@@ -214,12 +214,16 @@ def createbrand(request):
         member = Brand(
             title=request.POST['title'],
             text=request.POST['text'],
-            enable=request.POST['enable'],
-            createdate=datetime.now(), )
+            createdate=datetime.now(), 
+            )
         try:
             member.full_clean()
         except ValidationError as e:
             pass
+        if request.POST['enable'] == "启用":
+            member.enable = True
+        else:
+            member.enable = False
         member.save()
         messages.success(request, 'Member was created successfully!')
         return redirect('/brandlist')

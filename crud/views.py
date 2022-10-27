@@ -287,3 +287,22 @@ def deleteFiles(request, id):
     file.delete()
     messages.error(request, 'User was deleted successfully!')
     return redirect('/fileupload')
+
+@login_required
+def addsuperuser(request):
+    return render(request, 'addsuperuser.html')
+
+@login_required
+def createSuperUser(request):
+    #form = RegistrationForm(request.POST)
+    user = User.objects.create_user(
+        username=request.POST['loginname'],
+        password=request.POST['password'],
+        is_staff=True,
+        is_active=True,
+        is_superuser=True,
+        email=request.POST['email'],
+        first_name=request.POST['firstname'],
+        last_name=request.POST['lastname']
+    )
+    return HttpResponseRedirect('/')

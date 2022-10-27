@@ -1,0 +1,84 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <!--li class="breadcrumb-item">
+                    <a href="#">Player</a>
+                </li-->
+                <li class="breadcrumb-item active">添加管理账号</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    添加账号
+                </div>
+                <div class="card-body">
+                  <form class="form-horizontal" action="createSuperUser" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" name="loginname" placeholder="登录名" id="loginname" required>
+                                    <label for="loginname">账号名称</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" name="password" placeholder="密码" id="password" required>
+                                    <label for="password">密码</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" name="firstname" placeholder="名" id="firstname" required>
+                                    <label for="firstname">名</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input class="form-control" type="tel" name="lastname" placeholder="姓" id="lastname" required>
+                                    <label for="lastname">姓</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" name="email" placeholder="邮箱" id="email" required>
+                                    <label for="email">邮箱</label>
+                                </div>
+                            </div>
+                            <!--div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" name="location" id="inputLoca" class="form-control"  placeholder="Enter Location" required="">
+                                    <label for="inputLoca">Enter Location</label>
+                                </div>
+                            </div-->
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">确定 &nbsp;&nbsp;&nbsp;<span></span></button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+{% endblock %}
