@@ -8,17 +8,17 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <!--a href="#">BowerDee</a-->
-                </li>
+                <!--li class="breadcrumb-item">
+                    <a href="#">BowerDee</a>
+                </li-->
                 <li class="breadcrumb-item active">排行榜</li>
             </ol>
             <div class="card mb-3">
-                <div class="card-header">
+                <!--div class="card-header">
                     <i class="fas fa-table"></i>
                     排行榜
                     <a  class="btn btn-sm btn-success" href="{% url 'createquestion' %}" style="padding: 8px; float: right; background-color: green; color: white;">增加</a>
-                </div>
+                </div-->
                 <div class="card-body">
                     {% for message in messages %}
                         <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
@@ -38,7 +38,7 @@
                             <tbody>
                             {% for member in members %}
                                 <tr>
-                                    <td><img src="{{member.avatar_url}}" /></td>
+                                    <td><img src="{{member.avatar_url}}" width='50' height='50'/></td>
                                     <td>{{ member.nike_name }}</td>
                                     <td>{{ member.role_id }}</td>
                                     <td>{{ member.max_score }}</td>
