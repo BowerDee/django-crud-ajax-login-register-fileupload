@@ -20,7 +20,8 @@ from crud import models
 @login_required
 def index(request):
     members = views.getMemberForIndex(request.GET.get('page'))
-    return render(request, 'index.html', {'members': members})
+    #return render(request, 'index.html', {'members': members})
+    return render(request, 'index.html', {'members': members, 'charts':'111', 'v1':1,'v2':2,'v3':3,'v4':4})
 
 
 @login_required

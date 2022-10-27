@@ -44,7 +44,7 @@ def getMemberForIndex(page):
 @login_required
 def index(request):
     members = getMemberForIndex(request.GET.get('page'))
-    return render(request, 'index.html', {'members': members, 'charts':'111'})
+    return render(request, 'index.html', {'members': members, 'charts':'111', 'v1':1, 'v2':2,'v3':3, 'v4':4})
 
 
 @login_required
@@ -245,7 +245,7 @@ def playercharts(request):
         start = initialToday
         columns.append(start.strftime("%y-%m-%d"))
         #print(start, initialToday + timedelta(days=1))
-        obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)])
+        obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)]).values('uid').distinct()
         data1.append(len(obj))
         initialToday = initialToday - timedelta(days=1)
     #obj  = LoginCount.objects.filter(login_date__month=9)

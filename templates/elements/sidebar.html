@@ -6,7 +6,7 @@
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>仪表盘</span>
+                <span>玩家列表</span>
             </a>
         </li>
         {% comment %} <li class="nav-item">
@@ -15,10 +15,16 @@
                 <span>CRUD App</span>
             </a>
         </li> {% endcomment %}
-        <li class="nav-item">
+        <!--li class="nav-item">
             <a class="nav-link" href="{% url 'playerlist' %}">
                 <i class="fas fa-fw fa-database"></i>
                 <span>角色列表</span>
+            </a>
+        </li-->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'questionlist' %}">
+                <i class="fas fa-fw fa-database"></i>
+                <span>排行榜</span>
             </a>
         </li>
         <li class="nav-item">
