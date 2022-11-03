@@ -57,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': ['/home/ubuntu/dev/Server_wx/static/templates', './templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,7 +157,8 @@ LOGIN_REDIRECT_URL = 'home'
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static")
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    #'/home/ubuntu/dev/Server_wx/static/static'
+    os.path.join(BASE_DIR, "../Server_wx/static/static"),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
