@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from tempfile import tempdir
 from django.shortcuts import render, redirect
 import datetime
 from django.contrib import messages
@@ -77,7 +78,7 @@ def create(request):
         except ValidationError as e:
             pass
         member.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/playerlist')
     else:
         return render(request, 'addplayer.html')
@@ -162,7 +163,7 @@ def editbrandid(request, id):
             brand.enable= 0
         brand.createdate=datetime.now()
         brand.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/brandlist')
 
 @login_required
@@ -172,7 +173,7 @@ def editplayerinfo(request, id):
         account.phone=request.POST['phone']
         account.username=request.POST['username']
         account.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/playerlist')
 
 @login_required
@@ -203,7 +204,7 @@ def createquestion(request):
         except ValidationError as e:
             pass
         member.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/questionlist')
     else:
         return render(request, 'addquestion.html')
@@ -225,7 +226,7 @@ def createbrand(request):
         else:
             member.enable = False
         member.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/brandlist')
     else:
         return render(request, 'addbrand.html')
@@ -243,7 +244,7 @@ def editquestion(request, id):
         step.op_4=request.POST['op_4']
         step.correct=request.POST['correct']
         step.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/questionlist')
     else:
         members = Step.objects.get(id=id)
