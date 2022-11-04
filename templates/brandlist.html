@@ -7,17 +7,17 @@
 
         <div class="container-fluid">
             <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
+            <!-- <ol class="breadcrumb"> -->
                 <!--li class="breadcrumb-item">
                     <a href="#">BowerDee</a>
                 </li-->
-                <li class="breadcrumb-item active">公告列表</li>
-            </ol>
+                <!-- <li class="breadcrumb-item active">公告列表</li> -->
+            <!-- </ol> -->
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    公告列表
-                    <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">增加</a>
+                    <i class="fas fa-fw fa-tablet"></i>
+                    公告管理
+                    <!-- <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">增加</a> -->
                 </div>
                 <div class="card-body">
                     {% for message in messages %}
@@ -30,10 +30,10 @@
                             <thead>
                             <tr>
                                 <th>编号</th>
-                                <th>标题</th>
+                                <!-- <th>标题</th> -->
                                 <th>公告内容</th>
-                                <th>开启</th>
-                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -41,13 +41,13 @@
                             {% for member in members %}
                                 <tr>
                                     <td>{{ member.id }}</td>
-                                    <td>{{ member.title }}</td>
+                                    <!-- <td>{{ member.title }}</td> -->
                                     <td>{{ member.text }}</td>
-                                    <td>{{ member.enable }}</td>
+                                    <td>{{ member.title }}</td>
                                     <td>{{ member.createdate  |date:"Y-m-d H:i:s" }}</td>
-                                    <td>
+                                    <td style="text-align: center;">
                                         <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> 编辑</a>
-                                        <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a>
+                                        <!-- <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a> -->
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -63,5 +63,6 @@
     <script type="text/javascript">
         $("#id_username").attr("placeholder", "Enter Username");
         $("#id_password").attr("placeholder", "Enter Password");
+        $(".side_gggl").addClass("active")
     </script>
 {% endblock %}

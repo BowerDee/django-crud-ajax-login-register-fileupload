@@ -23,7 +23,7 @@
             </ol>
 
             <!-- Icon Cards-->
-            <div class="row">
+            <div class="row" style="padding-left: 15px;">
                 <div class="col-xl-3 col-sm-6 mb-3">
                     <div class="card text-white bg-primary o-hidden h-100">
                         <div class="card-body">
@@ -105,9 +105,9 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>头像</th>
                                 <th>账户ID</th>
-                                <th>手机</th>
+                                <th>头像</th>
+                                <!-- <th>手机</th> -->
                                 <th>三方ID</th>
                                 <th>用户名</th>
                                 <!--th>Age</th-->
@@ -116,25 +116,24 @@
                                 <!--th>Action</th-->
                             </tr>
                             </thead>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>头像</th>
                                     <th>账户ID</th>
-                                    <th>手机</th>
+                            
                                     <th>三方ID</th>
                                     <th>用户名</th>
-                                    <!--th>Age</th-->
-                                    <!--th>Avatar</th-->
+                                    
                                     <th>最后登录时间</th>
-                                    <!--th>Action</th-->
+                                
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                             <tbody>
                                 {% for member in members %}
                                 <tr>
-                                    <td><img src="https://slbpark.liangzimodel.com:8084/resource/avatar/{{member.third_id}}.png" width='50' height='50'/></td>
                                     <td>{{ member.id }}</td>
-                                    <td>{{ member.phone }}</td>
+                                    <td><img src="https://slbpark.liangzimodel.com:8084/resource/avatar/{{member.third_id}}.png" width='50' height='50'/></td>
+                                    <!-- <td>{{ member.phone }}</td> -->
                                     <td>{{ member.third_id }}</td>
                                     <td>{{ member.username }}</td>
                                     <!--td>{{ member.avatar_url }}<-/td-->
@@ -158,15 +157,18 @@
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!-- <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
                     <span>Copyright © BowerDee 2022</span>
                 </div>
             </div>
-        </footer>
+        </footer> -->
 
     </div>
 {% endblock %}
 {% block javascript %}
+<script type="text/javascript">
+    $(".side_sy").addClass("active")
+</script>
 {% endblock %}

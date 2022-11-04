@@ -3,68 +3,58 @@
 {% load static %}
 
 {% block body %}
-    <div id="content-wrapper">
+<div id="content-wrapper">
 
-        <div class="container-fluid">
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <!--li class="breadcrumb-item">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <!-- <ol class="breadcrumb"> -->
+        <!--li class="breadcrumb-item">
                     <a href="#">BowerDee</a>
                 </li-->
-                <li class="breadcrumb-item active">修改</li>
-            </ol>
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    修改问题
-                </div>
-                <div class="card-body">
-                    <form class="form-horizontal" action="editquestionid/{{ members.id }}" method="POST">
+        <!-- <li class="breadcrumb-item active">修改</li>
+            </ol> -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-tasks"></i>
+                修改问题
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" action="editquestionid/{{ members.id }}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div  class="form-label-group">
                                     <input type="text" class="form-control" value="{{ members.topic }}" name="topic" placeholder="标题" id="inputFirst1" required>
                                     <label for="inputFirst1">标题</label>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div  class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.describtion }}" name="describtion" placeholder="描述" id="inputLast2" required>
-                                    <label for="inputLast2">描述</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div  class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.tips }}" name="tips" placeholder="提示" id="inputdescription3" required>
-                                    <label for="inputdescription3">提示</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div  class="form-label-group">
-                                    <input class="form-control" type="text" value="{{ members.op_1 }}" name="op_1" placeholder="op_1" id="inputMobile4" required>
-                                    <label for="inputMobile4">op_1</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
+                            </div> -->
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.op_2 }}" name="op_2" placeholder="op_2" id="inputdescription5" required>
-                                    <label for="inputdescription5">op_2</label>
+                                    <input type="text" class="form-control" value="{{ members.describtion }}"
+                                        name="describtion" placeholder="题目" id="inputLast2" required>
+                                    <label for="inputLast2">题目</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input class="form-control" type="text" value="{{ members.op_3 }}" name="op_3" placeholder="op_3" id="inputMobile6" required>
-                                    <label for="inputMobile6">op_3</label>
+                                    <!-- <input class="form-control" type="text" value="{{ members.correct }}" name="correct"
+                                        placeholder="答案" id="inputMobile8" list=typelist_op required> -->
+                                    <label style="font-size: 12px;color: #777;padding: 5px 12px;"
+                                        for="inputMobile8">答案</label>
+                                    <select class="form-control" style="padding-top: 20px;height:50px ;"
+                                        value="{{ members.correct }}" id="inputMobile8" list=typelist_op name="correct" required>
+                                        <option value="op_1">选项一</option>
+                                        <option value="op_2">选项二</option>
+                                        <option value="op_3">选项三</option>
+                                        <option value="op_4">选项四</option>
+                                    </select>
+                                    <!-- <datalist id="typelist_op" style="display: inline-block;">
+                                        <option>op_1</option>
+                                        <option>op_2</option>
+                                        <option>op_3</option>
+                                        <option>op_4</option>
+                                    </datalist> -->
                                 </div>
                             </div>
                         </div>
@@ -73,11 +63,52 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" value="{{ members.op_4 }}" name="op_4" placeholder="op_4" id="inputdescription7" required>
-                                    <label for="inputdescription7">op_4</label>
+                                    <!-- <input type="text" style="width: 100%;" class="form-control" value="{{ members.tips }}" name="tips" placeholder="历史背景" id="inputdescription3" required> -->
+                                    <textarea type="text" style="width: 100%;padding-top: 30px;" class="form-control"
+                                        cols="30" rows="6" name="tips" placeholder="历史背景" id="inputdescription3"
+                                        required>{{ members.tips }}</textarea>
+                                    <label style="font-size: 12px;color: #777;" for="inputdescription3">历史背景</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input class="form-control" type="text" value="{{ members.op_1 }}" name="op_1"
+                                        placeholder="选项一" id="inputMobile4" required>
+                                    <label for="inputMobile4">选项一</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" value="{{ members.op_2 }}" name="op_2"
+                                        placeholder="选项二" id="inputdescription5" required>
+                                    <label for="inputdescription5">选项二</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input class="form-control" type="text" value="{{ members.op_3 }}" name="op_3"
+                                        placeholder="选项三" id="inputMobile6" required>
+                                    <label for="inputMobile6">选项三</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" value="{{ members.op_4 }}" name="op_4"
+                                        placeholder="选项四" id="inputdescription7" required>
+                                    <label for="inputdescription7">选项四</label>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
                                 <div  class="form-label-group">
                                     <input class="form-control" type="text" value="{{ members.correct }}" name="correct" placeholder="答案" id="inputMobile8" list=typelist_op required>
                                     <label for="inputMobile8">答案</label>
@@ -88,16 +119,39 @@
                                         <option>op_4</option>
                                     </datalist>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <button class="btn btn-primary btn-block" type="submit">提交 &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
-                </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
 {% block javascript %}
-
+<script type="text/javascript">
+    window.onload=function(){
+        var v = "{{members.correct}}"//document.getElementById("inputMobile8").value;
+        var index = 0;
+        if (v == "op_1")
+        {
+            index = 0;
+        }
+        else if(v == "op_2")
+        {
+             index = 1;
+        }
+        else if(v == "op_3")
+        {
+            index = 2;
+        }
+        else if(v == "op_4")
+        {
+            index = 3;
+        }
+        document.getElementById("inputMobile8")[index].selected=true;
+    }
+    $(".side_tk").addClass("active");
+</script>
 {% endblock %}

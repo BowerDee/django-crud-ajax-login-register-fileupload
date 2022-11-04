@@ -3,10 +3,23 @@
 </style>
 <ul class="sidebar navbar-nav">
     <ki class="navbar-nav">
-        <li class="nav-item active">
+        /* active */
+        <li class="nav-item side_sy">
             <a class="nav-link" href="{% url 'home' %}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>玩家列表</span>
+                <span>首页</span>
+            </a>
+        </li>
+        <li class="nav-item side_yhgl">
+            <a class="nav-link" href="{% url 'playerlist' %}">
+                <i class="fas fa-fw fa-address-card"></i>
+                <span>用户管理</span>
+            </a>
+        </li>
+        <li class="nav-item side_tk">
+            <a class="nav-link" href="{% url 'questionlist' %}">
+                <i class="fas fa-fw fa-tasks"></i>
+                <span>题库答题</span>
             </a>
         </li>
         {% comment %} <li class="nav-item">
@@ -21,22 +34,16 @@
                 <span>角色列表</span>
             </a>
         </li-->
-        <li class="nav-item">
+        <li class="nav-item side_jfph">
             <a class="nav-link" href="{% url 'scorelist' %}">
-                <i class="fas fa-fw fa-database"></i>
-                <span>排行榜</span>
+                <i class="fas fa-fw fa-tags"></i>
+                <span>积分排行</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'questionlist' %}">
-                <i class="fas fa-fw fa-database"></i>
-                <span>题库</span>
-            </a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item side_gggl">
             <a class="nav-link" href="{% url 'brandlist' %}">
-                <i class="fas fa-fw fa-database"></i>
-                <span>公告</span>
+                <i class="fas fa-fw fa-tablet"></i>
+                <span>公告管理</span>
             </a>
         </li>
         {% comment %} <li class="nav-item">
@@ -51,10 +58,16 @@
                 <span>Ajax Crud</span>
             </a>
         </li> {% endcomment %}
-        <li class="nav-item dropdown">
+        <li class="nav-item side_mmgl">
+            <a class="nav-link" href="{% url 'changePassword' %}">
+                <i class="fas fa-fw fa-key"></i>
+                <span>密码管理</span>
+            </a>
+        </li>
+        <!--li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>用户</span>
+                <span>用户管理</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 <a class="dropdown-item" href="{% url 'users' %}">用户列表</a>
@@ -63,13 +76,14 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-file"></i>
-                <span>更多属性</span>
+                <span>密码管理</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 {% comment %} <a class="dropdown-item" href="{% url 'upload_csv' %}">CSV Import</a> {% endcomment %}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'changePassword' %}">修改密码</a>
             </div>
-        </li>
+        </li-->
     </ki>
 </ul>
+
