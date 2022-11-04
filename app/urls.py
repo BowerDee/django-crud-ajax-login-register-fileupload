@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^createquestion$', createquestion, name='createquestion'),
     url(r'^createbrand$', createbrand, name='createbrand'),
     url(r'^questionlist$', questionlist, name='questionlist'),
+    url(r'^questionlistbydynasty$', questionlistbydynasty, name='questionlistbydynasty'),
     url(r'^editquestion/(?P<id>\d+)$', editquestion, name='editquestion'),
     url(r'^editquestion/editquestionid/(?P<id>\d+)$', editquestion, name='editquestionid'),
     url(r'^brandlist$', brandlist, name='brandlist'),
@@ -21,4 +22,5 @@ urlpatterns = [
     url(r'^deletebrand/(?P<id>\d+)$', deleteBrand, name='deletebrand'),
     url(r'^deletequestion/(?P<id>\d+)$', deletequestion, name='deletequestion'),
     url(r'^scorelist$', scorelist, name='scorelist'),
+    url(r'^scorelistbydynasty$', scorelistbydynasty, name='scorelistbydynasty'),
 ]

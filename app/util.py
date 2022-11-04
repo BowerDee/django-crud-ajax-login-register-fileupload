@@ -11,11 +11,20 @@ from .ThirdParty.dss.Serializer import serializer
 from datetime import datetime, timedelta
 from django import utils 
 
-def getScoreSum():
-    roleIDlist = Score.objects.filter().values('roleid').distinct()
+def getScoreSum(dynasty):
+    level = []
+    print(dynasty)
+    if dynasty == "han":
+        for i in range(1, 21):
+            level.append(i)
+    else:
+        for i in range(21, 41):
+            level.append(i)
+    print(level)
+    roleIDlist = Score.objects.filter(level__in=level).values('roleid').distinct()
     ret = []
     for r in roleIDlist:
-        rr = Score.objects.filter(roleid=r['roleid']).aggregate(Sum('score'))['score__sum']
+        rr = Score.objects.filter(roleid=r['roleid'], level__in=level).aggregate(Sum('score'))['score__sum']
         role = RoleInfo.objects.filter(id=r['roleid']).first()
         if role is None:
             continue
@@ -26,8 +35,8 @@ def getScoreSum():
         roleStr.update({'score':rr})
         roleStr.update({'role_id':r['roleid']})
         ret.append(roleStr)
-    print(ret)
     ret = sorted(ret, key=lambda item:item['score'], reverse=True)#[0:10]
+    print(ret)
     return ret
 
 def getUserCount_day():

@@ -51,6 +51,7 @@ def index(request):
 @login_required
 def list(request):
     members_list = RoleInfo.objects.all()
+    print(serializer(members_list))
     paginator = Paginator(members_list, 65536)
     page = request.GET.get('page')
     try:
@@ -59,7 +60,7 @@ def list(request):
         members = paginator.page(1)
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
-    return render(request, 'playerlist.html', {'members': members})
+    return render(request, 'playerlist.html', {'members': members, 'account':request.user.username})
 
 @login_required
 def create(request):
@@ -115,7 +116,17 @@ def deletequestion(request, id):
 
 @login_required
 def questionlist(request):
-    members_list = Step.objects.all()
+    dynasty = request.GET.get('dynasty')
+    if dynasty == None:
+        dynasty = "tang"
+    members_list = None
+    dynasty_cn = None
+    if dynasty == "han":
+        members_list = Step.objects.filter(level__in=[1,2,3,4,5])
+        dynasty_cn = "汉"
+    else:
+        members_list = Step.objects.filter(level__in=[21,22,23,24,25])
+        dynasty_cn = "唐"
     paginator = Paginator(members_list, 9999)
     page = request.GET.get('page')
     try:
@@ -124,19 +135,84 @@ def questionlist(request):
         members = paginator.page(1)
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
-    return render(request, 'questionlist.html', {'members': members})
+    def convertCorrect(correct):
+        ret = None
+        if correct == "op_1":
+            ret = "选项1"
+        elif correct == "op_2":
+            ret = "选项2"
+        elif correct == "op_3":
+            ret = "选项3"
+        elif correct == "op_4":
+            ret = "选项4"
+        return ret
+    def convertLevel(level, k):
+        return dynasty_cn + "-" + str(int(level%20)) + "-" + str(k)
+    k = 1
+    for i in range(len(members)):
+        members[i].correct = convertCorrect(members[i].correct)
+        members[i].level = convertLevel(members[i].level, k)
+        k = k + 1
+        if k > 10:
+            k = 1
+    return render(request, 'questionlist.html', {'members': members, "account":request.user.username})
+
+
+@login_required
+def questionlistbydynasty(request):
+    dynasty = request.GET.get('dynasty')
+    if dynasty == None:
+        dynasty = "tang"
+    members_list = None
+    dynasty_cn = None
+    if dynasty == "han":
+        members_list = Step.objects.filter(level__in=[1,2,3,4,5])
+        dynasty_cn = "汉"
+    else:
+        members_list = Step.objects.filter(level__in=[21,22,23,24,25])
+        dynasty_cn = "唐"
+    paginator = Paginator(members_list, 9999)
+    page = request.GET.get('page')
+    try:
+        members = paginator.page(page)
+    except PageNotAnInteger:
+        members = paginator.page(1)
+    except EmptyPage:
+        members = paginator.page(paginator.num_pages)
+    def convertCorrect(correct):
+        ret = None
+        if correct == "op_1":
+            ret = "选项1"
+        elif correct == "op_2":
+            ret = "选项2"
+        elif correct == "op_3":
+            ret = "选项3"
+        elif correct == "op_4":
+            ret = "选项4"
+        return ret
+    def convertLevel(level, k):
+        return dynasty_cn + "-" + str(int(level%20)) + "-" + str(k)
+    k = 1
+    for i in range(len(members)):
+        members[i].correct = convertCorrect(members[i].correct)
+        members[i].level = convertLevel(members[i].level, k)
+        k = k +1
+        if k > 10:
+            k = 1
+    return JsonResponse({"data":serializer(members)})
+    #return render(request, 'questionlist.html', {'members': members, "account":request.user.username})
+
 @login_required
 def scorelist(request):
-    members_list = Step.objects.all()
-    paginator = Paginator(members_list, 9999)
-    page = request.GET.get('page')
-    try:
-        members = paginator.page(page)
-    except PageNotAnInteger:
-        members = paginator.page(1)
-    except EmptyPage:
-        members = paginator.page(paginator.num_pages)
-    return render(request, 'scorelist.html', {'members': getScoreSum()})
+    return render(request, 'scorelist.html', {'members': getScoreSum('tang'), "account":request.user.username})
+
+@login_required
+def scorelistbydynasty(request):
+    dynasty = request.GET.get('dynasty')
+    if dynasty == None:
+        dynasty = "tang"
+    return JsonResponse({'data': serializer(getScoreSum(dynasty))})
+
 @login_required
 def brandlist(request):
     members_list = Brand.objects.all()
@@ -148,13 +224,19 @@ def brandlist(request):
         members = paginator.page(1)
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
-    return render(request, 'brandlist.html', {'members': members})
+    for i in range (len(members)):
+        if members[i].enable is True:
+            members[i].title = "开启"
+        else:
+            members[i].title = "禁用"
+        print(members[i].title)
+    return render(request, 'brandlist.html', {'members': members, "account":request.user.username})
 
 @login_required
 def editbrandid(request, id):
     if request.method == 'POST':
         brand = Brand.objects.filter(id = id).first()
-        brand.title=request.POST['title']
+        #brand.title=request.POST['title']
         brand.text=request.POST['text']
         enable = request.POST['enable']
         if enable == "True" or enable == 1:
@@ -163,7 +245,7 @@ def editbrandid(request, id):
             brand.enable= 0
         brand.createdate=datetime.now()
         brand.save()
-        messages.success(request, '创建成功!')
+        messages.success(request, '修改成功!')
         return redirect('/brandlist')
 
 @login_required
@@ -179,7 +261,8 @@ def editplayerinfo(request, id):
 @login_required
 def editbrand(request, id):
     members = Brand.objects.get(id=id)
-    context = {'members': members}
+    #context = {'members': members}
+    context = {'members': members, 'account':request.user.username}
     return render(request, 'editbrand.html', context)
 
 @login_required
@@ -235,7 +318,7 @@ def createbrand(request):
 def editquestion(request, id):
     if request.method == 'POST':
         step = Step.objects.filter(id = id).first()
-        step.topic=request.POST['topic']
+        #step.topic=request.POST['topic']
         step.describtion=request.POST['describtion']
         step.tips=request.POST['tips']
         step.op_1=request.POST['op_1']
@@ -244,11 +327,11 @@ def editquestion(request, id):
         step.op_4=request.POST['op_4']
         step.correct=request.POST['correct']
         step.save()
-        messages.success(request, '创建成功!')
+        messages.success(request, '修改成功!')
         return redirect('/questionlist')
     else:
         members = Step.objects.get(id=id)
-        context = {'members': members}
+        context = {'members': members, 'account':request.user.username}
         return render(request, 'editquestion.html', context)
 
 @login_required
