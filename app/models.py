@@ -42,7 +42,8 @@ class RoleInfo(models.Model):
     cur_score_tang = models.IntegerField(null=True, blank=True, default=0)
     max_score_han = models.IntegerField(null=True, blank=True, default=0)
     cur_score_han = models.IntegerField(null=True, blank=True, default=0)
-    last_signed_time = models.DateTimeField(null=True, blank=True)
+    last_signed_time_han = models.DateTimeField(null=True, blank=True)
+    last_signed_time_tang = models.DateTimeField(null=True, blank=True)
 
 # 分数记录
 class Score(models.Model):
