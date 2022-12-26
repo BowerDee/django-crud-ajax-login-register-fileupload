@@ -8,15 +8,15 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">Brand</a>
-                </li>
-                <li class="breadcrumb-item active">Add</li>
+                <!--li class="breadcrumb-item">
+                    <a href="#">BowerDee</a>
+                </li-->
+                <li class="breadcrumb-item active">增加</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Brand Add
+                    增加公告
                 </div>
                 <div class="card-body">
                   <form class="form-horizontal" action="createbrand" method="POST">
@@ -25,14 +25,14 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="title" placeholder="title" id="inputFirst" required>
-                                    <label for="inputFirst">title</label>
+                                    <input type="text" class="form-control" name="title" placeholder="标题" id="inputFirst_brand_title" required>
+                                    <label for="inputFirst_brand_title">标题</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="text" placeholder="text" id="inputLast" required>
-                                    <label for="inputLast">text</label>
+                                    <input type="text" class="form-control" name="text" placeholder="主体文本" id="inputLast_brand_body" required>
+                                    <label for="inputLast_brand_body">主体文本</label>
                                 </div>
                             </div>
                         </div>
@@ -40,14 +40,17 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="boolean" class="form-control" name="enable" placeholder="enable" id="inputdescription" required>
-                                    <label for="inputdescription">enable</label>
+                                <div>
+                                    <input type="text" class="form-control" name="enable" placeholder="下拉选择开启/禁用" id="inputdescription_brand_enable" list="typelist" required>
+                                    <datalist id="typelist">
+                                        <option>启用</option>
+                                        <option>禁用</option>
+                                    </datalist>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+                    <button class="btn btn-primary btn-block" type="submit">确定 &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
                 </div>
             </div>

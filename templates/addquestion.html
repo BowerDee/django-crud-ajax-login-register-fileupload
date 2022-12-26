@@ -8,15 +8,15 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">Question</a>
-                </li>
-                <li class="breadcrumb-item active">Add</li>
+                <!--li class="breadcrumb-item">
+                    <a href="#">BowerDee</a>
+                </li-->
+                <li class="breadcrumb-item active">增加</li>
             </ol>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Question Add
+                    新增问题
                 </div>
                 <div class="card-body">
                   <form class="form-horizontal" action="createquestion" method="POST">
@@ -25,14 +25,48 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="topic" placeholder="topic" id="inputFirst" required>
-                                    <label for="inputFirst">topic</label>
+                                    <input type="text" class="form-control" name="topic" placeholder="标题" id="inputFirst_topic" required>
+                                    <label for="inputFirst_topic">标题</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="describtion" placeholder="describtion" id="inputLast" required>
-                                    <label for="inputLast">describtion</label>
+                                    <input type="text" class="form-control" name="describtion" placeholder="描述" id="inputLast_desc" required>
+                                    <label for="inputLast_desc">描述</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div>
+                                    <input type="text" class="form-control" name="level" placeholder="下拉选择关卡" id="inputLast_level" list="typelist" required>
+                                    <datalist id="typelist">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>21</option>
+                                        <option>22</option>
+                                        <option>23</option>
+                                        <option>24</option>
+                                        <option>25</option>
+                                    </datalist>
+                                    <!--label for="inputLast_level">关卡</label-->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div >
+                                    <input type="text" class="form-control" name="correct" placeholder="下拉选择答案" id="inputdescription_correct" list="typelist_op" required>
+                                    <datalist id="typelist_op">
+                                        <option>op_1</option>
+                                        <option>op_2</option>
+                                        <option>op_3</option>
+                                        <option>op_4</option>
+                                    </datalist>
+                                    <!--label for="inputdescription_correct">答案</label-->
                                 </div>
                             </div>
                         </div>
@@ -41,8 +75,14 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="level" placeholder="level" id="inputLast" required>
-                                    <label for="inputLast">level</label>
+                                    <input type="text" class="form-control" name="op_1" placeholder="op_1" id="inputdescription_op1" required>
+                                    <label for="inputdescription_op1">选项1</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" class="form-control" name="op_2" placeholder="op_2" id="inputdescription_op2" required>
+                                    <label for="inputdescription_op2">选项2</label>
                                 </div>
                             </div>
                         </div>
@@ -51,14 +91,14 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="op_1" placeholder="aopn_1" id="inputdescription" required>
-                                    <label for="inputdescription">op_1</label>
+                                    <input type="text" class="form-control" name="op_3" placeholder="op_3" id="inputdescription_op3" required>
+                                    <label for="inputdescription_op3">选项3</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="op_2" placeholder="op_2" id="inputdescription" required>
-                                    <label for="inputdescription">op_2</label>
+                                    <input type="text" class="form-control" name="op_4" placeholder="op_4" id="inputdescription_op4" required>
+                                    <label for="inputdescription_op4">选项4</label>
                                 </div>
                             </div>
                         </div>
@@ -67,35 +107,13 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-label-group">
-                                    <input type="text" class="form-control" name="op_3" placeholder="op_3" id="inputdescription" required>
-                                    <label for="inputdescription">op_3</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" name="op_4" placeholder="op_4" id="inputdescription" required>
-                                    <label for="inputdescription">op_4</label>
+                                    <input type="text" class="form-control" name="tips" placeholder="提示" id="inputdescription_tips" required>
+                                    <label for="inputdescription_tips">提示</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" name="tips" placeholder="tips" id="inputdescription" required>
-                                    <label for="inputdescription">tips</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" class="form-control" name="correct" placeholder="correct" id="inputdescription" required>
-                                    <label for="inputdescription">correct</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-block" type="submit">Submit &nbsp;&nbsp;&nbsp;<span></span></button>
+                    <button class="btn btn-primary btn-block" type="submit">提交 &nbsp;&nbsp;&nbsp;<span></span></button>
                 </form>
                 </div>
             </div>

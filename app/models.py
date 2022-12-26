@@ -38,6 +38,10 @@ class RoleInfo(models.Model):
     body_res = models.CharField(max_length=64, null=True, blank=True) # 身体资源
     max_score = models.IntegerField(null=True, blank=True, default=0)
     cur_score = models.IntegerField(null=True, blank=True, default=0)
+    max_score_tang = models.IntegerField(null=True, blank=True, default=0)
+    cur_score_tang = models.IntegerField(null=True, blank=True, default=0)
+    max_score_han = models.IntegerField(null=True, blank=True, default=0)
+    cur_score_han = models.IntegerField(null=True, blank=True, default=0)
     last_signed_time = models.DateTimeField(null=True, blank=True)
 
 # 分数记录

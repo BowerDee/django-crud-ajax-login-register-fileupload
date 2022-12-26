@@ -21,5 +21,9 @@ urlpatterns = [
     url(r'^changePassword/$', views.changePassword, name='changePassword'),
     url(r'^changePassword/resetpassword/$', views.resetPassword, name='resetpassword'),
     #url(r'^file/delete$', views.changePassword, name='changePassword'),
+    #createSuperUser
     url(r'^file/delete/(?P<id>\d+)$', views.deleteFiles, name='deleteFiles'),
+    url(r'^addsuperuser$', views.addsuperuser, name='addsuperuser'),
+    url(r'^createSuperUser$', views.createSuperUser, name='createSuperUser'),
+
 ]

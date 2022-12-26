@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block title %}{% endblock %}
-    <title>SB Admin - Login</title>
+    <title>陕历博儿童博物园管理后台</title>
 
     {% load static %}
     <!-- Custom fonts for this template-->
@@ -17,8 +17,23 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{%static 'img/favicon.ico' %}" />
     {% block stylesheet %}{% endblock %}
-
+    <style>
+        .mt-5 {
+            margin-top: 0 !important;
+        }
+    
+        .container {
+            height: 285px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body class="bg-dark">

@@ -16,11 +16,13 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from crud import models
+from app.util import *
 
 @login_required
 def index(request):
     members = views.getMemberForIndex(request.GET.get('page'))
-    return render(request, 'index.html', {'members': members})
+    #return render(request, 'index.html', {'members': members})
+    return render(request, 'index.html', {'members': members, 'charts':'111', 'v1':getUserCount_day(),'v2':getUserCount_week(),'v3':getUserCount_month(),'v4':getAccountSize(), "account":request.user.username})
 
 
 @login_required
@@ -186,7 +188,7 @@ def users(request):
         users = paginator.page(1)
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
-    return render(request, 'users.html', {'users': users})
+    return render(request, 'users.html', {'users': users, "account":request.user.username})
 
 @login_required
 def user_delete(request, id):
@@ -262,12 +264,12 @@ def resetPassword(request):
     curPwd = request.POST.get('current_password')
     user = authenticate(username=request.user.username, password= curPwd)
     if user is None:
-        messages.success(request, "Successfully reset pwd")
+        messages.success(request, "当前密码不正确.")
         return redirect('changePassword')
     newPwd = request.POST.get('new_password')
     repeatPwd = request.POST.get('repeat_password')
     if newPwd != repeatPwd:
-        messages.success(request, "Successfully reset pwd")
+        messages.success(request, "确认密码不匹配")
         return redirect('changePassword')
     request.user.set_password(newPwd)
     request.user.save()
@@ -276,7 +278,7 @@ def resetPassword(request):
 @login_required
 def changePassword(request):
     print('changepasword')
-    return render(request, 'change_password.html')
+    return render(request, 'change_password.html',{"account":request.user.username})
 
 
 @login_required
@@ -285,3 +287,22 @@ def deleteFiles(request, id):
     file.delete()
     messages.error(request, 'User was deleted successfully!')
     return redirect('/fileupload')
+
+@login_required
+def addsuperuser(request):
+    return render(request, 'addsuperuser.html')
+
+@login_required
+def createSuperUser(request):
+    #form = RegistrationForm(request.POST)
+    user = User.objects.create_user(
+        username=request.POST['loginname'],
+        password=request.POST['password'],
+        is_staff=True,
+        is_active=True,
+        is_superuser=True,
+        email=request.POST['email'],
+        first_name=request.POST['firstname'],
+        last_name=request.POST['lastname']
+    )
+    return HttpResponseRedirect('/')

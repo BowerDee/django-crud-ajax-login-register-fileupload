@@ -3,6 +3,7 @@
 
   // Toggle the side navigation
   $("#sidebarToggle").on('click', function(e) {
+console.log(123);
     e.preventDefault();
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");

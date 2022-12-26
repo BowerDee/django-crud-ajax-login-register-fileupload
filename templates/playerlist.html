@@ -1,71 +1,82 @@
 {% extends 'layout/app.html' %}
 
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+
+</head>
+
 {% load static %}
-
 {% block body %}
-    <div id="content-wrapper">
 
-        <div class="container-fluid">
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Player list</li>
-            </ol>
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    Player List
-                    {% comment %} <a  class="btn btn-sm btn-success" href="{% url 'createplayer' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a> {% endcomment %}
-                </div>
-                <div class="card-body">
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+<div id="content-wrapper">
+
+    <div class="container-fluid">
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-fw fa-address-card"></i>
+                用户列表
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <th>role id</th>
-                                <th>max score</th>
-                                <th>current score</th>
-                                <th>nike name</th>
-                                <th>last sign time</th>
-                                <th>last login</th>
-                                <th>user id</th>
-                                <th>Action</th>
+                                <th>账户ID</th>
+                                <th>头像</th>
+                                <th>三方ID</th>
+                                <th>用户名</th>
+                                <th>唐积分</th>
+                                <th>汉积分</th>
+                                <th>最后登录时间</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             {% for member in members %}
-                                <tr>
-                                    <td>{{ member.id }}</td>
-                                    <td>{{ member.max_score }}</td>
-                                    <td>{{ member.cur_score }}</td>
-                                    <td>{{ member.nike_name }}</td>
-                                    <td>{{ member.last_signed_time  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ member.updatedate  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ member.userid_id }}</td>
-                                    <td>
-                                        {% comment %} <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a> {% endcomment %}
-                                        <a class="btn btn-sm btn-danger" href="deleteplayer/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ member.id }}</td>
+                                <td><img src="{{member.userid.avatar_url}}"
+                                        width='50' height='50' /></td>
+                                <!-- <td>{{ member.phone }}</td> -->
+                                <td>{{ member.userid.third_id }}</td>
+                                <td>{{ member.userid.username }}</td>
+                                <td>{{member.max_score_tang}}</td>
+                                <td>{{member.max_score_han}}</td>
+                                <!--td>{{ member.avatar_url }}<-/td-->
+                                <!--img src="avatar/{member.third_id}}.png"/-->
+                                <!--td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td-->
+                                <td>{{ member.userid.last_login |date:"Y-m-d H:i:s" }}</td>
+                                <!--td>
+                                        <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        <a class="btn btn-sm btn-danger" href="deleteaccount/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                    </td-->
+                            </tr>
                             {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            {% comment %} <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> {% endcomment %}
         </div>
+
     </div>
+    <!-- /.container-fluid -->
+
+    <!-- Sticky Footer -->
+    <!-- <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © BowerDee 2022</span>
+                </div>
+            </div>
+        </footer> -->
+
+</div>
 {% endblock %}
 {% block javascript %}
-    <script type="text/javascript">
-        $("#id_username").attr("placeholder", "Enter Username");
-        $("#id_password").attr("placeholder", "Enter Password");
-    </script>
+<script type="text/javascript">
+    $(".side_yhgl").addClass("active")
+</script>
 {% endblock %}

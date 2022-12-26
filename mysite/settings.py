@@ -57,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': ['./templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,7 +135,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -157,7 +157,8 @@ LOGIN_REDIRECT_URL = 'home'
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static")
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    #'/home/ubuntu/dev/Server_wx/static/static'
+    os.path.join(BASE_DIR, "./static"),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

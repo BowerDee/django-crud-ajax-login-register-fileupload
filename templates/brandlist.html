@@ -7,17 +7,17 @@
 
         <div class="container-fluid">
             <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
+            <!-- <ol class="breadcrumb"> -->
+                <!--li class="breadcrumb-item">
                     <a href="#">BowerDee</a>
-                </li>
-                <li class="breadcrumb-item active">Brand list</li>
-            </ol>
+                </li-->
+                <!-- <li class="breadcrumb-item active">公告列表</li> -->
+            <!-- </ol> -->
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    Brand List
-                    <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+                    <i class="fas fa-fw fa-tablet"></i>
+                    通知公告
+                    <!-- <a  class="btn btn-sm btn-success" href="{% url 'createbrand' %}" style="padding: 8px; float: right; background-color: green; color: white;">增加</a> -->
                 </div>
                 <div class="card-body">
                     {% for message in messages %}
@@ -29,25 +29,26 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>id</th>
-                                <th>title</th>
-                                <th>text</th>
-                                <th>enable</th>
-                                <th>create date</th>
-                                <th>Action</th>
+                                <th>编号</th>
+                                <!-- <th>标题</th> -->
+                                <th>公告内容</th>
+                                <th>状态</th>
+                                <th>时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for member in members %}
                                 <tr>
                                     <td>{{ member.id }}</td>
+                                    <!-- <td>{{ member.title }}</td> -->
+                                    <!-- <td>{{ member.text }}</td> -->
+									<td><a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}">点击查看</a></td>
                                     <td>{{ member.title }}</td>
-                                    <td>{{ member.text }}</td>
-                                    <td>{{ member.enable }}</td>
-                                    <td>{{ member.createdate  |date:"d-m-Y H:i:s" }}</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
-                                        <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                    <td>{{ member.createdate  |date:"Y-m-d H:i:s" }}</td>
+                                    <td style="text-align: center;">
+                                        <a class="btn btn-sm btn-warning" href="editbrand/{{ member.id }}"> <span class="fa fa-edit"></span> 编辑</a>
+                                        <!-- <a class="btn btn-sm btn-danger" href="deletebrand/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a> -->
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -63,5 +64,6 @@
     <script type="text/javascript">
         $("#id_username").attr("placeholder", "Enter Username");
         $("#id_password").attr("placeholder", "Enter Password");
+        $(".side_gggl").addClass("active")
     </script>
 {% endblock %}

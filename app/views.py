@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from tempfile import tempdir
 from django.shortcuts import render, redirect
 import datetime
 from django.contrib import messages
@@ -19,13 +20,14 @@ from jinja2 import Environment, FileSystemLoader
 from pyecharts.globals import CurrentConfig
 from django.conf import settings
 from datetime import datetime, timedelta
+from django import utils 
 
 CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("{}/templates".format(settings.BASE_DIR)))
  
 from django.http import HttpResponse
 from pyecharts.charts import Line, Bar
 from pyecharts.globals import ThemeType
- 
+from .util import *
 # 图表的布局, Page垂直布局，Grid水平布局
 from pyecharts.charts import Page, Grid
 
@@ -43,12 +45,13 @@ def getMemberForIndex(page):
 @login_required
 def index(request):
     members = getMemberForIndex(request.GET.get('page'))
-    return render(request, 'index.html', {'members': members, 'charts':'111'})
+    return render(request, 'index.html', {'members': members, 'charts':'111', 'v1':1, 'v2':2,'v3':3, 'v4':4})
 
 
 @login_required
 def list(request):
     members_list = RoleInfo.objects.all()
+    print(serializer(members_list))
     paginator = Paginator(members_list, 65536)
     page = request.GET.get('page')
     try:
@@ -57,7 +60,7 @@ def list(request):
         members = paginator.page(1)
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
-    return render(request, 'playerlist.html', {'members': members})
+    return render(request, 'playerlist.html', {'members': members, 'account':request.user.username})
 
 @login_required
 def create(request):
@@ -76,7 +79,7 @@ def create(request):
         except ValidationError as e:
             pass
         member.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/playerlist')
     else:
         return render(request, 'addplayer.html')
@@ -100,6 +103,12 @@ def deleteBrand(request, id):
     return redirect('brandlist')
 
 @login_required
+def deleteReward(request, id):
+    members = Brand.objects.get(id=id)
+    members.delete()
+    return redirect('reward')
+
+@login_required
 def deleteplayer(request, id):
     members = RoleInfo.objects.get(id=id)
     members.delete()
@@ -113,7 +122,17 @@ def deletequestion(request, id):
 
 @login_required
 def questionlist(request):
-    members_list = Step.objects.all()
+    dynasty = request.GET.get('dynasty')
+    if dynasty == None:
+        dynasty = "tang"
+    members_list = None
+    dynasty_cn = None
+    if dynasty == "han":
+        members_list = Step.objects.filter(level__in=[1,2,3,4,5])
+        dynasty_cn = "汉"
+    else:
+        members_list = Step.objects.filter(level__in=[21,22,23,24,25])
+        dynasty_cn = "唐"
     paginator = Paginator(members_list, 9999)
     page = request.GET.get('page')
     try:
@@ -122,11 +141,87 @@ def questionlist(request):
         members = paginator.page(1)
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
-    return render(request, 'questionlist.html', {'members': members})
+    def convertCorrect(correct):
+        ret = None
+        if correct == "op_1":
+            ret = "选项1"
+        elif correct == "op_2":
+            ret = "选项2"
+        elif correct == "op_3":
+            ret = "选项3"
+        elif correct == "op_4":
+            ret = "选项4"
+        return ret
+    def convertLevel(level, k):
+        return dynasty_cn + "-" + str(int(level%20)) + "-" + str(k)
+    k = 1
+    for i in range(len(members)):
+        members[i].correct = convertCorrect(members[i].correct)
+        members[i].level = convertLevel(members[i].level, k)
+        k = k + 1
+        if k > 10:
+            k = 1
+    return render(request, 'questionlist.html', {'members': members, "account":request.user.username})
+
+
+@login_required
+def questionlistbydynasty(request):
+    dynasty = request.GET.get('dynasty')
+    if dynasty == None:
+        dynasty = "tang"
+    members_list = None
+    dynasty_cn = None
+    if dynasty == "han":
+        members_list = Step.objects.filter(level__in=[1,2,3,4,5])
+        dynasty_cn = "汉"
+    else:
+        members_list = Step.objects.filter(level__in=[21,22,23,24,25])
+        dynasty_cn = "唐"
+    paginator = Paginator(members_list, 9999)
+    page = request.GET.get('page')
+    try:
+        members = paginator.page(page)
+    except PageNotAnInteger:
+        members = paginator.page(1)
+    except EmptyPage:
+        members = paginator.page(paginator.num_pages)
+    def convertCorrect(correct):
+        ret = None
+        if correct == "op_1":
+            ret = "选项1"
+        elif correct == "op_2":
+            ret = "选项2"
+        elif correct == "op_3":
+            ret = "选项3"
+        elif correct == "op_4":
+            ret = "选项4"
+        return ret
+    def convertLevel(level, k):
+        return dynasty_cn + "-" + str(int(level%20)) + "-" + str(k)
+    k = 1
+    for i in range(len(members)):
+        members[i].correct = convertCorrect(members[i].correct)
+        members[i].level = convertLevel(members[i].level, k)
+        k = k +1
+        if k > 10:
+            k = 1
+    return JsonResponse({"data":serializer(members)})
+    #return render(request, 'questionlist.html', {'members': members, "account":request.user.username})
+
+@login_required
+def scorelist(request):
+    return render(request, 'scorelist.html', {'members': getScoreSum('tang'), "account":request.user.username})
+
+@login_required
+def scorelistbydynasty(request):
+    dynasty = request.GET.get('dynasty')
+    if dynasty == None:
+        dynasty = "tang"
+    return JsonResponse({'data': serializer(getScoreSum(dynasty))})
 
 @login_required
 def brandlist(request):
-    members_list = Brand.objects.all()
+    members_list = Brand.objects.filter(id=1)
     paginator = Paginator(members_list, 9999)
     page = request.GET.get('page')
     try:
@@ -135,13 +230,38 @@ def brandlist(request):
         members = paginator.page(1)
     except EmptyPage:
         members = paginator.page(paginator.num_pages)
-    return render(request, 'brandlist.html', {'members': members})
+    for i in range (len(members)):
+        if members[i].enable is True:
+            members[i].title = "开启"
+        else:
+            members[i].title = "禁用"
+        print(members[i].title)
+    return render(request, 'brandlist.html', {'members': members, "account":request.user.username})
+
+@login_required
+def reward(request):
+    members_list = Brand.objects.filter(id=3)
+    paginator = Paginator(members_list, 9999)
+    page = request.GET.get('page')
+    try:
+        members = paginator.page(page)
+    except PageNotAnInteger:
+        members = paginator.page(1)
+    except EmptyPage:
+        members = paginator.page(paginator.num_pages)
+    for i in range (len(members)):
+        if members[i].enable is True:
+            members[i].title = "开启"
+        else:
+            members[i].title = "禁用"
+        print(members[i].title)
+    return render(request, 'reward.html', {'members': members, "account":request.user.username})
 
 @login_required
 def editbrandid(request, id):
     if request.method == 'POST':
         brand = Brand.objects.filter(id = id).first()
-        brand.title=request.POST['title']
+        #brand.title=request.POST['title']
         brand.text=request.POST['text']
         enable = request.POST['enable']
         if enable == "True" or enable == 1:
@@ -150,8 +270,37 @@ def editbrandid(request, id):
             brand.enable= 0
         brand.createdate=datetime.now()
         brand.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '修改成功!')
         return redirect('/brandlist')
+
+@login_required
+def editbrand(request, id):
+    members = Brand.objects.get(id=id)
+    #context = {'members': members}
+    context = {'members': members, 'account':request.user.username}
+    return render(request, 'editbrand.html', context)
+
+def editreward(request, id):
+    members = Brand.objects.get(id=id)
+    #context = {'members': members}
+    context = {'members': members, 'account':request.user.username}
+    return render(request, 'editreward.html', context)
+
+@login_required
+def editrewardid(request, id):
+    if request.method == 'POST':
+        brand = Brand.objects.filter(id = id).first()
+        #brand.title=request.POST['title']
+        brand.text=request.POST['text']
+        enable = request.POST['enable']
+        if enable == "True" or enable == 1:
+            brand.enable= 1
+        else:
+            brand.enable= 0
+        brand.createdate=datetime.now()
+        brand.save()
+        messages.success(request, '修改成功!')
+        return redirect('/reward')
 
 @login_required
 def editplayerinfo(request, id):
@@ -160,14 +309,10 @@ def editplayerinfo(request, id):
         account.phone=request.POST['phone']
         account.username=request.POST['username']
         account.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/playerlist')
 
-@login_required
-def editbrand(request, id):
-    members = Brand.objects.get(id=id)
-    context = {'members': members}
-    return render(request, 'editbrand.html', context)
+
 
 @login_required
 def createquestion(request):
@@ -191,7 +336,7 @@ def createquestion(request):
         except ValidationError as e:
             pass
         member.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/questionlist')
     else:
         return render(request, 'addquestion.html')
@@ -202,14 +347,18 @@ def createbrand(request):
         member = Brand(
             title=request.POST['title'],
             text=request.POST['text'],
-            enable=request.POST['enable'],
-            createdate=datetime.now(), )
+            createdate=datetime.now(), 
+            )
         try:
             member.full_clean()
         except ValidationError as e:
             pass
+        if request.POST['enable'] == "启用":
+            member.enable = True
+        else:
+            member.enable = False
         member.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '创建成功!')
         return redirect('/brandlist')
     else:
         return render(request, 'addbrand.html')
@@ -218,7 +367,7 @@ def createbrand(request):
 def editquestion(request, id):
     if request.method == 'POST':
         step = Step.objects.filter(id = id).first()
-        step.topic=request.POST['topic']
+        #step.topic=request.POST['topic']
         step.describtion=request.POST['describtion']
         step.tips=request.POST['tips']
         step.op_1=request.POST['op_1']
@@ -227,25 +376,24 @@ def editquestion(request, id):
         step.op_4=request.POST['op_4']
         step.correct=request.POST['correct']
         step.save()
-        messages.success(request, 'Member was created successfully!')
+        messages.success(request, '修改成功!')
         return redirect('/questionlist')
     else:
         members = Step.objects.get(id=id)
-        context = {'members': members}
+        context = {'members': members, 'account':request.user.username}
         return render(request, 'editquestion.html', context)
 
-from django.utils import timezone
 @login_required
 def playercharts(request):
-    initialToday = timezone.now()
-    #initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day)
-    print(initialToday)
+    initialToday = utils.timezone.now()
+    initialToday = datetime(year=initialToday.year, month=initialToday.month, day=initialToday.day, tzinfo = initialToday.tzinfo)
     columns = []
     data1 = []
     for i in range(10):
         start = initialToday
         columns.append(start.strftime("%y-%m-%d"))
-        obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)])
+        #print(start, initialToday + timedelta(days=1))
+        obj = LoginCount.objects.filter(login_date__range=[start, initialToday  + timedelta(days=1)]).values('uid').distinct()
         data1.append(len(obj))
         initialToday = initialToday - timedelta(days=1)
     #obj  = LoginCount.objects.filter(login_date__month=9)
@@ -257,12 +405,12 @@ def playercharts(request):
  
     line = (
         Line()
-            .set_global_opts(title_opts=opts.TitleOpts(title="Active User", subtitle=""))
+            .set_global_opts(title_opts=opts.TitleOpts(title="活跃玩家", subtitle=""))
             .add_xaxis(columns)
-            .add_yaxis("Active User count", data1, symbol_size=10, is_smooth=True, color="green",
+            .add_yaxis("活跃玩家", data1, symbol_size=10, is_smooth=True, color="green",
                        markpoint_opts=opts.MarkPointOpts(data=[
-                           opts.MarkPointItem(name="max", type_="max"),
-                           opts.MarkPointItem(name="min", type_="min")]))
+                           opts.MarkPointItem(name="最大", type_="max"),
+                           opts.MarkPointItem(name="最小", type_="min")]))
             #.add_yaxis("data 2", data2, symbol_size=10, is_smooth=True, color="blue")
     )
     bar = Bar()
@@ -272,8 +420,8 @@ def playercharts(request):
     #bar.add_yaxis("", data2)
     bar.set_series_opts(markline_opts=opts.MarkLineOpts(data=[opts.MarkLineItem(name="average", type_="average")]))
     bar.set_series_opts(markpoint_opts=opts.MarkPointOpts(data=[
-        opts.MarkPointItem(name="max", type_="max"),
-        opts.MarkPointItem(name="min", type_="min")
+        opts.MarkPointItem(name="最大", type_="max"),
+        opts.MarkPointItem(name="最小", type_="min")
     ]))
     grid1_1.add(line, grid_opts=opts.GridOpts(pos_right="0%"))
     #grid1_1.add(bar, grid_opts=opts.GridOpts(pos_left="55%"))

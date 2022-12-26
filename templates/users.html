@@ -1,59 +1,82 @@
 {% extends 'layout/app.html' %}
 
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+
+</head>
+
 {% load static %}
-
 {% block body %}
-    <div id="content-wrapper">
 
-        <div class="container-fluid">
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">BowerDee</a>
-                </li>
-                <li class="breadcrumb-item active">Users</li>
-            </ol>
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    User list
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+<div id="content-wrapper">
+
+    <div class="container-fluid">
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-fw fa-address-card"></i>
+                用户列表
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Description</th>
-                                <th>Date</th>
-                                <th>Created At</th>
-                                <th>Action</th>
+                                <th>账户ID</th>
+                                <th>头像</th>
+                                <th>三方ID</th>
+                                <th>用户名</th>
+                                <th>唐积分</th>
+                                <th>汉积分</th>
+                                <th>最后登录时间</th>
                             </tr>
-                            </thead>
-                            <tbody>
-                            {% for user in users %}
-                                {% if user.email == 'gowthaman.nkl1@gmail.com' %}
-                                {% else %}
-                                    <tr>
-                                    <td>{{ user.first_name }}</td>
-                                    <td>{{ user.last_name }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.last_login |date:"d-m-Y H:i:s" }}</td>
-                                    <td>{{ user.date_joined  |date:"d-m-Y H:i:s" }}</td>
-                                    <td><a class="btn btn-sm btn-danger" href="delete/{{ user.id }}"><span class="fa fa-trash"></span> Delete</a></td>
-                                {% endif %}
+                        </thead>
+                        <tbody>
+                            {% for member in members %}
+                            <tr>
+                                <td>{{ member.id }}</td>
+                                <td><img src="https://slbpark.liangzimodel.com:8084/resource/avatar/{{member.third_id}}.png"
+                                        width='50' height='50' /></td>
+                                <!-- <td>{{ member.phone }}</td> -->
+                                <td>{{ member.third_id }}</td>
+                                <td>{{ member.username }}</td>
+                                <td></td>
+                                <td></td>
+                                <!--td>{{ member.avatar_url }}<-/td-->
+                                <!--img src="avatar/{member.third_id}}.png"/-->
+                                <!--td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td-->
+                                <td>{{ member.last_login |date:"Y-m-d H:i:s" }}</td>
+                                <!--td>
+                                        <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        <a class="btn btn-sm btn-danger" href="deleteaccount/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                    </td-->
                             </tr>
                             {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            {% comment %} <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> {% endcomment %}
         </div>
+
     </div>
+    <!-- /.container-fluid -->
+
+    <!-- Sticky Footer -->
+    <!-- <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © BowerDee 2022</span>
+                </div>
+            </div>
+        </footer> -->
+
+</div>
 {% endblock %}
 {% block javascript %}
-    <script type="text/javascript">
-    </script>
+<script type="text/javascript">
+    $(".side_yhgl").addClass("active")
+</script>
 {% endblock %}

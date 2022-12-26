@@ -16,28 +16,28 @@
 
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Overview</li>
+                <!--li class="breadcrumb-item">
+                    <a href="#">后台管理</a>
+                </li-->
+                <li class="breadcrumb-item active">总览</li>
             </ol>
 
             <!-- Icon Cards-->
-            {% comment %} <div class="row">
+            <div class="row" style="padding-left: 15px;">
                 <div class="col-xl-3 col-sm-6 mb-3">
                     <div class="card text-white bg-primary o-hidden h-100">
                         <div class="card-body">
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-comments"></i>
                             </div>
-                            <div class="mr-5">26 New Messages!</div>
+                            <div class="mr-5">今天活跃玩家总数：{{v1}}</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <!--a class="card-footer text-white clearfix small z-1" href="#">
                             <span class="float-left">View Details</span>
                             <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
                             </span>
-                        </a>
+                        </a-->
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-3">
@@ -46,14 +46,14 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-list"></i>
                             </div>
-                            <div class="mr-5">11 New Tasks!</div>
+                            <div class="mr-5">最近一周活跃玩家总数：{{v2}}</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <!--a class="card-footer text-white clearfix small z-1" href="#">
                             <span class="float-left">View Details</span>
                                 <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
                             </span>
-                        </a>
+                        </a-->
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-3">
@@ -62,14 +62,14 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-shopping-cart"></i>
                             </div>
-                            <div class="mr-5">123 New Orders!</div>
+                            <div class="mr-5">最近一个月活跃玩家总数：{{v3}}</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <!--a class="card-footer text-white clearfix small z-1" href="#">
                             <span class="float-left">View Details</span>
                             <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
                             </span>
-                        </a>
+                        </a-->
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-3">
@@ -78,17 +78,17 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-life-ring"></i>
                             </div>
-                            <div class="mr-5">13 New Tickets!</div>
+                            <div class="mr-5">总玩家数量：{{v4}}</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <!--a class="card-footer text-white clearfix small z-1" href="#">
                             <span class="float-left">View Details</span>
                             <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
                             </span>
-                        </a>
+                        </a-->
                     </div>
                 </div>
-            </div> {% endcomment %}
+            </div>
 
 
             <!-- DataTables Example -->
@@ -98,46 +98,48 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    BowerDee GM Plat.
+                    玩家列表
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Uid</th>
-                                <th>Phone</th>
-                                <th>Third id</th>
-                                <th>Username</th>
+                                <th>账户ID</th>
+                                <th>头像</th>
+                                <!-- <th>手机</th> -->
+                                <th>三方ID</th>
+                                <th>用户名</th>
                                 <!--th>Age</th-->
                                 <!--th>Avatar</th-->
-                                <th>Create date</th>
+                                <th>最后登录时间</th>
                                 <!--th>Action</th-->
                             </tr>
                             </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Uid</th>
-                                <th>Phone</th>
-                                <th>Third id</th>
-                                <th>Username</th>
-                                <!--th>Age</th-->
-                                <!--th>Avatar</th-->
-                                <th>Create date</th>
-                                <!--th>Action</th-->
-                            </tr>
-                            </tfoot>
+                            <!-- <tfoot>
+                                <tr>
+                                    <th>头像</th>
+                                    <th>账户ID</th>
+                            
+                                    <th>三方ID</th>
+                                    <th>用户名</th>
+                                    
+                                    <th>最后登录时间</th>
+                                
+                                </tr>
+                            </tfoot> -->
                             <tbody>
                                 {% for member in members %}
                                 <tr>
                                     <td>{{ member.id }}</td>
-                                    <td>{{ member.phone }}</td>
+                                    <td><img src="https://slbpark.liangzimodel.com:8084/resource/avatar/{{member.third_id}}.png" width='50' height='50'/></td>
+                                    <!-- <td>{{ member.phone }}</td> -->
                                     <td>{{ member.third_id }}</td>
                                     <td>{{ member.username }}</td>
                                     <!--td>{{ member.avatar_url }}<-/td-->
                                     <!--img src="avatar/{member.third_id}}.png"/-->
                                     <!--td>{{ member.createddate  |date:"d-m-Y H:i:s" }}</td-->
-                                    <td>{{ member.last_login  |date:"d-m-Y H:i:s" }}</td>
+                                    <td>{{ member.last_login  |date:"Y-m-d H:i:s" }}</td>
                                     <!--td>
                                         <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a>
                                         <a class="btn btn-sm btn-danger" href="deleteaccount/{{ member.id }}"><span class="fa fa-trash"></span> Delete</a>
@@ -148,22 +150,25 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                {% comment %} <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> {% endcomment %}
             </div>
 
         </div>
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!-- <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © BowDee 2022</span>
+                    <span>Copyright © BowerDee 2022</span>
                 </div>
             </div>
-        </footer>
+        </footer> -->
 
     </div>
 {% endblock %}
 {% block javascript %}
+<script type="text/javascript">
+    $(".side_sy").addClass("active")
+</script>
 {% endblock %}
