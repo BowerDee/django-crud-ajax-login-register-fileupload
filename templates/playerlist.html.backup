@@ -1,0 +1,83 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">BoerDee</a>
+                </li>
+                <li class="breadcrumb-item active">角色列表</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    角色列表
+                    {% comment %} <a  class="btn btn-sm btn-success" href="{% url 'createplayer' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a> {% endcomment %}
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>角色ID</th>
+                                <th>最大积分</th>
+                                <th>当前积分</th>
+                                <th>昵称</th>
+                                <th>最后签到时间</th>
+                                <!--th>最后登录时间</th-->
+                                <th>账户ID</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            {% comment %} <tfoot>
+                                <tr>
+                                    <th>角色ID</th>
+                                    <th>最大积分</th>
+                                    <th>当前积分</th>
+                                    <th>昵称</th>
+                                    <th>最后签到时间</th>
+                                    <th>最后登录时间</th>
+                                    <th>账户ID</th>
+                                    <th>操作</th>
+                                </tr>
+                            </tfoot> {% endcomment %}
+                            <tbody>
+                            {% for member in members %}
+                                <tr>
+                                    <td>{{ member.id }}</td>
+                                    <td>{{ member.max_score }}</td>
+                                    <td>{{ member.cur_score }}</td>
+                                    <td>{{ member.nike_name }}</td>
+                                    <td>{{ member.last_signed_time  |date:"Y-m-d H:i:s" }}</td>
+                                    <!--td>{{ member.updatedate  |date:"Y-m-d H:i:s" }}</td=-->
+                                    <td>{{ member.userid_id }}</td>
+                                    <td>
+                                        {% comment %} <a class="btn btn-sm btn-warning" href="editplayer/{{ member.id }}"> <span class="fa fa-edit"></span> Edit</a> {% endcomment %}
+                                        <a class="btn btn-sm btn-danger" href="deleteplayer/{{ member.id }}"><span class="fa fa-trash"></span> 删除</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        $("#id_username").attr("placeholder", "Enter Username");
+        $("#id_password").attr("placeholder", "Enter Password");
+    </script>
+{% endblock %}
