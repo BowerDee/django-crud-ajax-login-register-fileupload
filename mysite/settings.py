@@ -170,3 +170,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 
 X_FRAME_OPTIONS = 'ALLOWALL url'
+
+WORK_DO_MAIN = "https://127.0.0.1:9000"

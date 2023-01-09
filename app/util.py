@@ -9,7 +9,8 @@ from django.db.models import Sum
 from enum import Enum
 from .ThirdParty.dss.Serializer import serializer
 from datetime import datetime, timedelta
-from django import utils 
+from django import utils
+from django.conf import settings
 
 def getScoreSum(dynasty):
     #level = []
@@ -45,7 +46,8 @@ def getScoreSum(dynasty):
         ret = RoleInfo.objects.filter(max_score_tang__gt = 0).order_by('-max_score_tang')[:10]
     for role in ret:
         if role.userid.third_id is not None:
-            url = "https://slbpark.liangzimodel.com:8084/resource/avatar/{id}.png".format(id=role.userid.third_id)
+            domain = settings.WORK_DO_MAIN
+            url = domain + "/resource/avatar/{id}.png".format(id=role.userid.third_id)
             role.avatar_url = url
             role.role_id = role.id
             if dynasty == "han":
