@@ -33,7 +33,7 @@ from pyecharts.charts import Page, Grid
 
 def getMemberForIndex(page):
     members_list = AccountInfo.objects.all()
-	for m in members_list:
+    for m in members_list:
         domain = settings.WORK_DO_MAIN
         m.avatar_url_t = domain + "/resource/avatar/{id}.png".format(id=m.third_id)
     paginator = Paginator(members_list, 65536)
