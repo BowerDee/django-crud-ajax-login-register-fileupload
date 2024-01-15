@@ -188,7 +188,7 @@ def users(request):
         users = paginator.page(1)
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
-    return render(request, 'users.html', {'users': users, "account":request.user.username})
+    return render(request, 'LoginUser.html', {'users': users, "account":request.user.username})
 
 @login_required
 def user_delete(request, id):
